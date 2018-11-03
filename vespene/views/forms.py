@@ -26,6 +26,8 @@ from crispy_forms.bootstrap import TabHolder, Tab
 from crispy_forms.layout import Layout
 from crispy_forms.helper import FormHelper
 
+from django_ace import AceWidget
+
 PLUGIN_LOADER = PluginLoader()
 ISOLATION_CHOICES = PLUGIN_LOADER.get_isolation_choices()
 SCM_CHOICES = PLUGIN_LOADER.get_scm_choices()
@@ -94,7 +96,7 @@ class ProjectForm(BaseForm):
 
         # TODO: improve formatting of all script and variable field editors
         widgets = {
-           'script': forms.Textarea(attrs={'rows':20, 'cols':80}),
+           'script': AceWidget(mode='powershell', width='100%', height='400px'), # forms.Textarea(attrs={'rows':20, 'cols':80}),
            'launch_groups' : forms.CheckboxSelectMultiple(),
            'owner_groups' : forms.CheckboxSelectMultiple()
         }
