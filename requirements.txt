@@ -15,3 +15,5 @@ gunicorn==19.9.0
 PyGithub==1.43.2
 PyYAML==3.13
 django-settings-export==1.2.1
+
+django_ace==1.0.4
