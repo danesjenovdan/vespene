@@ -102,7 +102,7 @@ class ProjectForm(BaseForm):
 
         # TODO: improve formatting of all script and variable field editors
         widgets = {
-           'script': AceWidget(mode='powershell', width='100%', height='400px'), # forms.Textarea(attrs={'rows':20, 'cols':80}),
+           'script': AceWidget(mode='powershell', width='100%', height='400px', theme='github'), # forms.Textarea(attrs={'rows':20, 'cols':80}),
            'launch_groups' : forms.CheckboxSelectMultiple(),
            'owner_groups' : forms.CheckboxSelectMultiple()
         }
