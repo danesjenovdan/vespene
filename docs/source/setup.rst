@@ -59,6 +59,7 @@ The setup scripts currently support:
 * Ubuntu Bionic Beaver (18.04)
 * CentOS 7 (using software collections)
 * Arch Linux
+* openSUSE
 * OS X (via homebrew)
 
 If you are unsure of what platform to use or do not have a preference, Ubuntu Bionic Beaver (for production or development)  and OS X (for trying things out or development) are suggested.
@@ -117,9 +118,11 @@ name that hostname now, and keep that in mind when you get to the database setup
 Otherwise, you'll install it as part of this setup process. You could also choose to use an external database,
 such as PostgreSQL on Amazon RDS.
 
-It is important to be aware that this configuration you are editing now is just for the install automation, normally Vespene configuration
+The configuration you are editing now is just for the quick setup script, normally Vespene configuration
 lives in /etc/vespene. These setup scripts will be configuring some settings in /etc/vespene
-with your choices. There are some defaults that ship with the application (like :ref:`plugins`) that are completely skipped by this
+with your choices. 
+
+There are some defaults that ship with the application (like :ref:`plugins`) that are completely skipped by this
 setup process, and you'll want to read up on those later once you have things working. You'll get Vespene with a minimal plugin
 configuration that should work for learning the tool, but that you might want to customize later.
 

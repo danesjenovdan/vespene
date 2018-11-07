@@ -30,6 +30,8 @@ PLUGIN_LOADER = PluginLoader()
 ISOLATION_CHOICES = PLUGIN_LOADER.get_isolation_choices()
 SCM_CHOICES = PLUGIN_LOADER.get_scm_choices()
 ORGANIZATION_CHOICES = [['github','github']]
+PLANNER_CHOICES = PLUGIN_LOADER.get_autoscaling_planner_choices()
+EXECUTOR_CHOICES = PLUGIN_LOADER.get_autoscaling_executor_choices()
 
 class BaseForm(forms.ModelForm):
 
@@ -37,8 +39,12 @@ class BaseForm(forms.ModelForm):
         super(BaseForm, self).__init__(*args, **kwargs)
 
     def make_read_only(self):
+        template_names = ['django/forms/widgets/text.html', 'django/forms/widgets/textarea.html']
         for x in self.Meta.fields:
-            self.fields[x].widget.attrs['disabled'] = True
+            if self.fields[x].widget.template_name in template_names:
+                self.fields[x].widget.attrs['readonly'] = True
+            else:
+                self.fields[x].widget.attrs['disabled'] = True
         return self
 
 class StageForm(BaseForm):
@@ -85,7 +91,7 @@ class ProjectForm(BaseForm):
     class Meta:
         model = Project
         fields = ('name', 'description', 'pipeline', 'pipeline_enabled', 'stage', 'script', 'timeout', 'variables', 
-            'scm_type', 'repo_url', 'repo_branch', 'scm_login', 'ssh_keys', 
+            'scm_type', 'repo_url', 'repo_branch', 'recursive', 'scm_login', 'ssh_keys', 
             'owner_groups', 'variable_sets', 'worker_pool', 'webhook_enabled', 'webhook_token',
             'container_base_image', 'launch_questions', 'launch_groups',
             'schedule_enabled','monday','tuesday','wednesday','thursday','friday',
@@ -106,7 +112,7 @@ class ProjectForm(BaseForm):
             TabHolder(
                 Tab('Info', 'name', 'description'),
                 Tab('Script', 'script', 'timeout', 'container_base_image'),
-                Tab('Repository', 'scm_type', 'repo_url', 'repo_branch', 'scm_login', 'webhook_enabled', 'webhook_token'),
+                Tab('Repository', 'scm_type', 'repo_url', 'repo_branch', 'recursive', 'scm_login', 'webhook_enabled', 'webhook_token'),
                 Tab('Schedule', 'schedule_enabled','monday','tuesday','wednesday','thursday','friday',
                     'saturday','sunday','weekday_start_hours','weekday_start_minutes','weekend_start_hours',
                     'weekend_start_minutes','schedule_threshold'),
@@ -132,7 +138,7 @@ class OrganizationForm(BaseForm):
         model = Organization
         fields = ('name', 'organization_type', 'description', 'organization_identifier', 'api_endpoint', 'import_enabled', 'import_without_dotfile', 'default_worker_pool', 
         'refresh_minutes', 'force_rescan', 'scm_login', 'worker_pool', 'created_by',
-        'overwrite_project_name', 'overwrite_project_script', 'overwrite_configurations', 'allow_worker_pool_assignment', 'auto_attach_ssh_keys')
+        'overwrite_project_name', 'overwrite_project_script', 'overwrite_configurations', 'allow_worker_pool_assignment', 'allow_pipeline_definition', 'auto_attach_ssh_keys')
         widgets = {}
 
     def __init__(self, *args, **kwargs):
@@ -143,7 +149,7 @@ class OrganizationForm(BaseForm):
                 Tab('Info', 'name', 'description'),
                 Tab('Import Configuration', 'organization_type', 'organization_identifier', 'api_endpoint', 'scm_login', 'import_enabled', 'refresh_minutes', 'force_rescan'),
                 Tab('Import Rules', 'import_without_dotfile', 'default_worker_pool', 'overwrite_project_name', 'overwrite_project_script', 'overwrite_configurations',
-                'allow_worker_pool_assignment', 'auto_attach_ssh_keys'),
+                'allow_worker_pool_assignment', 'allow_pipeline_definition', 'auto_attach_ssh_keys'),
                 Tab('Environment', 'worker_pool')
             )
         )
@@ -267,10 +273,14 @@ class WorkerPoolForm(BaseForm):
     
     sudo_password = forms.CharField(widget=forms.PasswordInput(), required=False)
     isolation_method = forms.ChoiceField(choices=ISOLATION_CHOICES)
+    planner = forms.ChoiceField(choices=PLANNER_CHOICES)
+    executor = forms.ChoiceField(choices=EXECUTOR_CHOICES)
 
     class Meta:
         model = WorkerPool
-        fields = ('name', 'variables', 'variable_sets', 'isolation_method', 'sudo_user', 'sudo_password')
+        fields = ('name', 'variables', 'variable_sets', 'isolation_method', 'sudo_user', 'sudo_password',
+            'autoscaling_enabled', 'planner', 'executor', 'running_weight', 'queued_weight', 'excess', 'multiplier',
+            'minimum', 'maximum', 'executor_command', 'reevaluate_minutes')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -280,6 +290,7 @@ class WorkerPoolForm(BaseForm):
             TabHolder(
                 Tab('Info', 'name'),
                 Tab('Variables', 'variable_sets', 'variables'),
+                Tab('Autoscaling', 'autoscaling_enabled', 'planner', 'minimum', 'maximum', 'running_weight', 'queued_weight', 'excess', 'multiplier', 'reevaluate_minutes', 'executor', 'executor_command'),
                 Tab('Security', 'isolation_method', 'sudo_user', 'sudo_password')
             )
         )

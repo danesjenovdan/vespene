@@ -75,5 +75,14 @@ PLUGIN_CONFIGURATION = dict(
         common = "vespene.plugins.variables.common",
         pipelines = "vespene.plugins.variables.pipelines",
         snippets = "vespene.plugins.variables.snippets"
+    ),
+
+    # autoscaling
+
+    autoscaling_executors = OrderedDict(
+        shell = "vespene.plugins.autoscale_executor.shell"
+    ),
+    autoscaling_planners = OrderedDict(
+        stock = "vespene.plugins.autoscale_planner.stock",
     )
 )
