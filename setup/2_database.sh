@@ -9,6 +9,7 @@
 source ./0_common.sh
 
 # ---
+
 echo "installing packages ..."
 CONFIG=""
 PG_PREFIX=""
@@ -18,6 +19,10 @@ if [[ "$DISTRO" == "redhat" ]]; then
    # use software collections
    PG_PREFIX="/opt/rh/rh-postgresql10/root/usr/bin/"
    CONFIG="/var/opt/rh/rh-postgresql10/lib/pgsql/data/pg_hba.conf"
+   sudo yum -y install postgresql-server
+elif [[ "$DISTRO" == "opensuse" ]]; then
+   zypper install -y postgresql-server postgresql-contrib
+   CONFIG="/var/lib/pgsql/data/pg_hba.conf"
 elif [[ "$DISTRO" == "ubuntu" ]]; then
    sudo apt install -y postgresql postgresql-contrib
    CONFIG="/etc/postgresql/10/main/pg_hba.conf"
@@ -29,6 +34,7 @@ elif [[ "$DISTRO" == "MacOS" ]]; then
 fi
 
 # ---
+
 echo "initializing the database server..."
 
 if [[ "$DISTRO" == "archlinux" ]]; then
@@ -37,11 +43,14 @@ elif [[ "$DISTRO" == "MacOS" ]]; then
     initdb /usr/local/var/postgres
 elif [[ "$DISTRO" == "redhat" ]]; then
     sudo -u postgres ${PG_PREFIX}postgresql-setup initdb
+elif [[ "$DISTRO" == "opensuse" ]]; then
+    sudo -u postgres initdb -D '/var/lib/pgsql/data/'
 else
     echo "initdb should not be needed on this platform"
 fi
 
 # ----
+
 echo "configuring security at ${CONFIG} ..."
 
 # configure PostgreSQL security to allow the postgres account in locally, and allow
@@ -55,6 +64,8 @@ END_OF_CONF
 
 sudo chown $DB_USER $CONFIG
 
+# ---
+
 if [ "$DISTRO" == "redhat" ]; then
    echo "creating symbolic links to libraries..."
    sudo ln -s /opt/rh/rh-postgresql10/root/usr/lib64/libpq.so.rh-postgresql10-5 /usr/lib64/libpq.so.rh-postgresql10-5
@@ -62,6 +73,7 @@ if [ "$DISTRO" == "redhat" ]; then
 fi
 
 # ---
+
 echo "starting postgresql..."
 if [ "$OSTYPE" == "linux-gnu" ]; then
     if [ "$DISTRO" == "redhat" ]; then  
@@ -76,6 +88,7 @@ elif [ "$DISTRO" == "MacOS" ]; then
 fi
 
 # --
+
 echo "creating the vespene database and user..."
 echo "  (if you any errors from 'cd' here or further down they can be ignored)"
 
@@ -89,6 +102,7 @@ else
 fi
 
 # --
+
 echo "granting access..."
 # give the user access and set their password
 $POST_SUDO ${PG_PREFIX}psql -d vespene -c "GRANT ALL on DATABASE vespene TO vespene"

@@ -1,6 +1,6 @@
 <html>
 <!-- (C) 2018 Michael DeHaan and The Vespene Project -->
-<!-- this source code is Apache 2 licensed and available from http://vespene.io -->
+<!-- this source code is Apache 2 + Commons Clause licensed and available from http://vespene.io -->
 
 <head>
 <meta charset="utf-8">
@@ -88,7 +88,9 @@ $(document).ready(function(){
 
 <br/>
 <br>
+{% if version is defined %}
 <center><font size="-4" color="#101010">Vespene {{ version }}. (C) 2018 Michael DeHaan LLC + Contributors.</font></center>
+{% endif %}
 
 </body>
 
