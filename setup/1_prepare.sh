@@ -13,7 +13,7 @@ if [ "$DISTRO" == "redhat" ]; then
     # on Red Hat
     # sudo yum-config-manager --enable rhel-server-rhscl-7-rpms ?
     sudo yum -y install epel-release
-    sudo yum -y install gcc python36 python36-devel supervisor rh-postgresql10
+    sudo yum -y install gcc python36 python36-devel supervisor rh-postgresql10 openldap-devel
     sudo python36 -m ensurepip
     sudo tee /etc/profile.d/enable_pg10.sh >/dev/null << END_OF_PG10
     #!/bin/bash
@@ -30,6 +30,8 @@ elif [ "$DISTRO" == "ubuntu" ]; then
     sudo apt-get install -y gcc libssl-dev postgresql-client python3 python3-pip python3-setuptools supervisor
 elif [ "$DISTRO" == "archlinux" ]; then
     sudo pacman --noconfirm -Sy python python-pip python-setuptools postgresql supervisor sudo
+elif [ "$DISTRO" == "alpine" ]; then
+    sudo apk add musl-dev build-base python3-dev libffi-dev postgresql postgresql-dev supervisor 
 elif [ "$DISTRO" == "MacOS" ]; then
     brew install python@3 postgresql supervisor
 fi
@@ -37,7 +39,11 @@ fi
 #---
 
 if [ "$DISTRO" != "MacOS" ]; then
-    sudo useradd vespene
+    if [ "$DISTRO" != "alpine" ]; then
+        sudo useradd vespene
+    else
+        sudo adduser -D vespene
+    fi
 fi
 
 #---
