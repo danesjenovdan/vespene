@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FAQ/Troubleshooting &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Partnership Program" href="partnership.html" />
+    <link rel="prev" title="Development Guide" href="development_guide.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FAQ / Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#my-build-takes-a-long-time-to-execute-hangs">My build takes a long time to execute / hangs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i-see-some-error-in-the-worker-logs-but-don-t-have-enough-information">I see some error in the worker logs but don’t have enough information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#when-i-click-on-the-globe-icon-in-the-app-to-browse-a-build-root-the-url-is-not-valid-or-reachable">When I click on the globe icon in the app to browse a build root, the URL is not valid or reachable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#my-build-fails-with-a-message-about-sudo">My build fails with a message about sudo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#my-docker-isolated-build-can-t-take-advantage-of-my-ssh-keys">My docker-isolated build can’t take advantage of my SSH keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#something-isn-t-validated-well-in-the-gui">Something isn’t validated well in the GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i-am-experiencing-an-error-in-the-setup-process">I am experiencing an error in the setup process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vespene-doesn-t-live-update-with-status">Vespene doesn’t live update with status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-is-the-rest-api">Where is the REST API?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#can-i-use-apache-or-nginx-with-vespene">Can I use Apache or NGINX with Vespene?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-is-windows-support">How is Windows support?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#why-is-this-ui-forms-based">Why is this UI forms based?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-about-accessibility">What about Accessibility?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#does-this-project-offer-cowsay-integration">Does this project offer cowsay-integration?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-about-mobile">What about Mobile?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-your-roadmap-public">Is your roadmap public?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i-found-a-typo-or-grammar-error-in-the-docs">I found a typo or grammar error in the docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-about-x-can-we-improve-x">What about X / Can We Improve X?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>FAQ/Troubleshooting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/faq.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="faq-troubleshooting">
+<span id="faq"></span><h1>FAQ/Troubleshooting<a class="headerlink" href="#faq-troubleshooting" title="Permalink to this headline">¶</a></h1>
+<p>If you encounter problems, you can always stop by <cite>talk.vespene.io &lt;http://talk.vespene.io&gt;</cite> to get help,
+but try the following things first.</p>
+<div class="section" id="my-build-takes-a-long-time-to-execute-hangs">
+<h2>My build takes a long time to execute / hangs<a class="headerlink" href="#my-build-takes-a-long-time-to-execute-hangs" title="Permalink to this headline">¶</a></h2>
+<p>Vespene makes a lot of effort to try to ensure software checkouts are non-interactive.</p>
+<p>Checkouts are always executed with timeout commands to not permanently block workers, but occasionally some
+bad configurations may block builds for longer than you would like.</p>
+<p>Your setup (per instructions) should first and foremost always execute workers with “ssh-agent”.  If this is done,
+SSH keys attached to the project will be used when checking out the project.</p>
+<p>If the repo is not publicly readable, check to make sure you have configured either a service login (for http or https URLs)
+or an SSH key (for those that are not) on any project that is encountering problems.</p>
+<p>If you provide a SSH key that is locked but it does not have a valid unlock password provided, the build will also take a while
+before automatically failing.</p>
+</div>
+<div class="section" id="i-see-some-error-in-the-worker-logs-but-don-t-have-enough-information">
+<h2>I see some error in the worker logs but don’t have enough information<a class="headerlink" href="#i-see-some-error-in-the-worker-logs-but-don-t-have-enough-information" title="Permalink to this headline">¶</a></h2>
+<p>The logs the worker normally outputs to standard out/error are consumed automatically by supervisord and stored in
+/var/log/vespene.  However, these logs are not necessarily very verbose.</p>
+<p>Build output is available by clicking on the build object in the web interface, or by looking at the physical log in
+the build working directory.</p>
+</div>
+<div class="section" id="when-i-click-on-the-globe-icon-in-the-app-to-browse-a-build-root-the-url-is-not-valid-or-reachable">
+<h2>When I click on the globe icon in the app to browse a build root, the URL is not valid or reachable<a class="headerlink" href="#when-i-click-on-the-globe-icon-in-the-app-to-browse-a-build-root-the-url-is-not-valid-or-reachable" title="Permalink to this headline">¶</a></h2>
+<p>By default when running Vespene, workers check in and register their hostname in the database.  The purpose of this is so
+that if there are multiple workers, those workers can serve their build roots automatically using the built-in Vespene
+build server.</p>
+<p>Of course, hostnames are notoriously unreliable.  If you find the hostnames are not what you would like, you can refer
+to <a class="reference internal" href="settings.html#settings"><span class="std std-ref">Settings</span></a> for information on setting the hostname in the worker configuration.</p>
+<p>Alternatively, you could choose to use a post-build trigger (see <a class="reference internal" href="plugins.html#triggers"><span class="std std-ref">Trigger Plugins</span></a>) to copy all build roots to a common location,
+and then refer to <a class="reference internal" href="settings.html#settings"><span class="std std-ref">Settings</span></a> to change the globe icon to point to that archive instead.  This would be the most reliable
+option if you expect host names to change, for instance in a cloud context.</p>
+</div>
+<div class="section" id="my-build-fails-with-a-message-about-sudo">
+<h2>My build fails with a message about sudo<a class="headerlink" href="#my-build-fails-with-a-message-about-sudo" title="Permalink to this headline">¶</a></h2>
+<p>The default configuration for a worker pool uses “sudo” as the security isolation mechanism but does not provide
+a username or password.</p>
+<p>You’ll need to fill one in.</p>
+<p>For developer setups, if you are running Vespene under your user account, it’s actually ok to just put the same
+username down for the sudo user and leave the password blank.</p>
+<p>Whatever user you select will need access to read the build-root.</p>
+</div>
+<div class="section" id="my-docker-isolated-build-can-t-take-advantage-of-my-ssh-keys">
+<h2>My docker-isolated build can’t take advantage of my SSH keys<a class="headerlink" href="#my-docker-isolated-build-can-t-take-advantage-of-my-ssh-keys" title="Permalink to this headline">¶</a></h2>
+<p>This is expected.  If you are using docker to isolate the security of builds on a given worker pool, SSH can be used
+for checkout, but those same SSH keys are not available within the build environment, which actually happens inside
+a docker build command.</p>
+<p>For instance, if you are trying to deploy something with SSH, you need to switch to the “sudo” isolation type for
+the worker pool.</p>
+<p>If you want to still have container security isolation for other builds, create more than one worker pool, and just
+use the sudo-isolated worker pool for your automation jobs.</p>
+</div>
+<div class="section" id="something-isn-t-validated-well-in-the-gui">
+<h2>Something isn’t validated well in the GUI<a class="headerlink" href="#something-isn-t-validated-well-in-the-gui" title="Permalink to this headline">¶</a></h2>
+<p>Vespene is still pretty new, so we don’t do a lot of checking to see that you don’t put in something like a limmerick
+in the repo field of a project.  Rather, the system will wait until the build executes and may fail then.</p>
+<p>Similarly, if you do something like put in invalid JSON in some places, the system may just fail a build with a traceback.</p>
+<p>We’ll improve most of these over time and these are on our short list to improve.</p>
+<p>If you encounter some problem that was not easy to figure out, let us know.</p>
+</div>
+<div class="section" id="i-am-experiencing-an-error-in-the-setup-process">
+<h2>I am experiencing an error in the setup process<a class="headerlink" href="#i-am-experiencing-an-error-in-the-setup-process" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes distributions change or your local configurations will make our stock configurations not work well.</p>
+<p>Try setting up Vespene on a clean machine and follow the instructions closely.</p>
+<p>This is definitely a good time to stop by the official forum.</p>
+<p>If you are debugging a <em>development</em> setup, versus following the official installation steps, please share where
+you hit a problem and what is unique about your environment.</p>
+</div>
+<div class="section" id="vespene-doesn-t-live-update-with-status">
+<h2>Vespene doesn’t live update with status<a class="headerlink" href="#vespene-doesn-t-live-update-with-status" title="Permalink to this headline">¶</a></h2>
+<p>Currently Vespene does not contain any kind of web-socket implementation to do live updates of build status.</p>
+<p>You’ll just need to pretend it was 2005 and hit good-old-fashioned reload.</p>
+<p>We also would like to make something a bit more friendly that would show a view on “/” with most recent builds
+and attention to any failed builds, and make something more friendly for showing on a NOC.</p>
+</div>
+<div class="section" id="where-is-the-rest-api">
+<h2>Where is the REST API?<a class="headerlink" href="#where-is-the-rest-api" title="Permalink to this headline">¶</a></h2>
+<p>A REST API for the system is not yet available, but will be added in late 2018.  This API may be read-only in first incantations.</p>
+</div>
+<div class="section" id="can-i-use-apache-or-nginx-with-vespene">
+<h2>Can I use Apache or NGINX with Vespene?<a class="headerlink" href="#can-i-use-apache-or-nginx-with-vespene" title="Permalink to this headline">¶</a></h2>
+<p>Yes, you can proxy Vespene’s server (gunicorn) with another web server.  However Vespene expects to be “/”, so you can’t mount
+those URLs on a different URL space at this point.</p>
+</div>
+<div class="section" id="how-is-windows-support">
+<h2>How is Windows support?<a class="headerlink" href="#how-is-windows-support" title="Permalink to this headline">¶</a></h2>
+<p>I think this was mentioned a few times in the docs, but we really haven’t made any efforts to make this system support Windows yet.</p>
+<p>However, most changes are related to paths and such, and if reasonably abstracted and clean, we’re quite open to patches
+that would add Windows support and would encourage them.</p>
+<p>There are some obvious cases where we use shell tools in the build scripts (like “timeout”) that may have to have conditional
+behavior but we are not really using any Python modules that shouldn’t be portable.</p>
+<p>In short, it probably won’t be terribly difficult.</p>
+</div>
+<div class="section" id="why-is-this-ui-forms-based">
+<h2>Why is this UI forms based?<a class="headerlink" href="#why-is-this-ui-forms-based" title="Permalink to this headline">¶</a></h2>
+<p>The UI is MUCH faster to develop this way, and more reliable, than if we had to track all the latest shiny things
+in React or Angular development land.  We’re quite open to CSS improvements now, but want to keep things simple in Javascript
+land so it is easy to work on for everyone.</p>
+<p>Right now, we only have a handful of templates and they are very generic for all object types.</p>
+</div>
+<div class="section" id="what-about-accessibility">
+<h2>What about Accessibility?<a class="headerlink" href="#what-about-accessibility" title="Permalink to this headline">¶</a></h2>
+<p>Sorry about that - this project is new, and it’s quite obvious that things in the UI are <em>not</em> very accessible at this point. We’re always open for tips, but I think the best way to handle this may be to make an EXCELLENT cli client that can do everything the UI can do.  This is also a good reason as it would provide a strong test layer for the proposed REST API. Such a CLI project would alos include an API library for easier access to the REST API.</p>
+<p>This is on the radar, but it may happen after January 2019.</p>
+</div>
+<div class="section" id="does-this-project-offer-cowsay-integration">
+<h2>Does this project offer cowsay-integration?<a class="headerlink" href="#does-this-project-offer-cowsay-integration" title="Permalink to this headline">¶</a></h2>
+<p>Thanks you for remembering past projects! It is time for new things, though.</p>
+</div>
+<div class="section" id="what-about-mobile">
+<h2>What about Mobile?<a class="headerlink" href="#what-about-mobile" title="Permalink to this headline">¶</a></h2>
+<p>I bet it looks pretty rough now!</p>
+<p>While I’ve never wanted to look at build results on my phone, we’re very open to mobile upgrades.
+Stop by the forum and let’s talk about how to do this.</p>
+</div>
+<div class="section" id="is-your-roadmap-public">
+<h2>Is your roadmap public?<a class="headerlink" href="#is-your-roadmap-public" title="Permalink to this headline">¶</a></h2>
+<p>We like to talk about good ideas all the time, but because a BETTER idea may come up tomorrow, we’d rather not release
+a roadmap that would appear like any kind of commitment.  We’d also probably move way faster than that roadmap anyway.</p>
+<p>Please join <cite>talk.vespene.io &lt;talk.vespene.io&gt;</cite> to talk about ideas!</p>
+</div>
+<div class="section" id="i-found-a-typo-or-grammar-error-in-the-docs">
+<h2>I found a typo or grammar error in the docs<a class="headerlink" href="#i-found-a-typo-or-grammar-error-in-the-docs" title="Permalink to this headline">¶</a></h2>
+<p>Thank you!  We don’t believe in automated spell check as it puts humans out of jobs.</p>
+<p>More seriously, that’s more because it’s written in Sphinx and edited in vim.
+Documentation correction can be submitted by sending a pull request to the source code in docs/source.</p>
+</div>
+<div class="section" id="what-about-x-can-we-improve-x">
+<h2>What about X / Can We Improve X?<a class="headerlink" href="#what-about-x-can-we-improve-x" title="Permalink to this headline">¶</a></h2>
+<p>Yes! The project is young and the sky is the limit, stop by the forum and let’s talk about things!
+No current design decisions, except those that will impact upgrades, are sacred at this point.</p>
+<p>This includes openness to new types of plugins of all sorts.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="partnership.html" class="btn btn-neutral float-right" title="Partnership Program" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="development_guide.html" class="btn btn-neutral" title="Development Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

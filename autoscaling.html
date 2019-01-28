@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Autoscaling &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Authorization" href="authz.html" />
+    <link rel="prev" title="Webhooks" href="webhooks.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Autoscaling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#worker-pool-configuration">Worker Pool Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shell-executor">Shell Executor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#image-preparation">Image Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-worker-command-line">The Worker Command Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multiple-workers-per-instance">Multiple Workers Per Instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-autoscaling-engine">Running the Autoscaling Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#debugging">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Autoscaling</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/autoscaling.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="autoscaling">
+<span id="id1"></span><h1>Autoscaling<a class="headerlink" href="#autoscaling" title="Permalink to this headline">¶</a></h1>
+<p>STATUS: New and Experimental!</p>
+<p>In most use cases for Vespene, it’s fine and perhaps easier to set up a fixed number of workers (see <a class="reference internal" href="workers.html#worker-pools"><span class="std std-ref">Worker Pools</span></a>).</p>
+<p>If you expect build demand to be highly variable, however, you might want to change the number of workers automatically throughout
+the day.</p>
+<p>Even without using Vespene’s built-in autoscaling, this could be done by manually adjusting an autoscaling group.</p>
+<p>The Vespene autoscaler, however, is an advanced feature that dynamically adjusts the number of running workers in a Vespene worker
+pool based on load.</p>
+<p>It is a highly configurable system where both the “planner” and “executor” components are individually pluggable.</p>
+<div class="section" id="worker-pool-configuration">
+<h2>Worker Pool Configuration<a class="headerlink" href="#worker-pool-configuration" title="Permalink to this headline">¶</a></h2>
+<p>To enable autoscaling, go to a worker pool in the UI, then go to the “Autoscaling Tab”.  Check “enable autoscaling” and then
+be prepared to feast on a slew of tuning options!</p>
+<p>Select both a “planning” and “executor” plugin to implement your preferences. At this time, there’s only one choice for both, so that is super easy.</p>
+<p>The other options however require some explanation and are related to the mathematics behind the size calculations.</p>
+<p>When the default ‘stock’ planner runs, it looks at the number of queued and running builds, and then executes a formula to determine
+the desired number of workers to send to the executor plugin.</p>
+<p>This formula is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b1</span> <span class="o">=</span> <span class="p">(</span><span class="n">number_of_queued_builds</span> <span class="o">*</span> <span class="n">queued_weight</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">number_of_running_builds</span> <span class="o">*</span> <span class="n">running_weight</span><span class="p">)</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="p">(</span><span class="n">b1</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">)</span> <span class="o">+</span> <span class="n">excess</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">b2</span><span class="p">,</span> <span class="n">maximum</span><span class="p">),</span> <span class="n">minimum</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The constants configured on the worker pool are as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>queued_weight - how many workers to allocate per queued build (default: 1)</li>
+<li>running_weight - how many workers to allocate per running  build (default: 1)</li>
+<li>multiplier - multiplies the calculated result by a floating point value (default: 1)</li>
+<li>excess - a bonus number of builds to allocate regardless of the calculation (default: 0)</li>
+<li>min (default: 0) and max (default: 10) - provide a bounds on the overall equation</li>
+</ul>
+</div></blockquote>
+<p>The defaults should be good to use without modification in most cases.</p>
+<p>In addition to the mentioned numbers, ‘reevaluate_minutes’ (default: 5) is used to recalculate the autoscaling dimensions after however many number of minutes.</p>
+<p>This result is then fed into the executor step.</p>
+</div>
+<div class="section" id="shell-executor">
+<h2>Shell Executor<a class="headerlink" href="#shell-executor" title="Permalink to this headline">¶</a></h2>
+<p>The shell executor runs the configured command with the following variables templated into it using the Jinja2 templating
+language:</p>
+<ul class="simple">
+<li>worker - the worker pool object in Django</li>
+<li>size - the number of workers to allocate using the formula</li>
+<li>queued_size - the raw number of queued builds (subject to min and max) ignoring running builds</li>
+</ul>
+<p>For example, if using Terraform, you might keep your terraform plans in a git repo.</p>
+<p>The configured executor command might then be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">cd</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">plans</span><span class="p">;</span> <span class="n">git</span> <span class="n">pull</span><span class="p">;</span> <span class="n">terraform</span> <span class="n">apply</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">plans</span><span class="o">/</span><span class="p">{{</span> <span class="n">worker_pool</span><span class="o">.</span><span class="n">name</span> <span class="p">}}</span><span class="o">.</span><span class="n">tf</span> <span class="o">-</span><span class="n">var</span> <span class="s1">&#39;size={{ size}}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If your provisioning system is declarative, always use the variable ‘size’ for the count.</p>
+<p>If you can’t track the number of worker  instances once they are allocated, then you have a non-declarative system. In this case, deploy workloads only for ‘queued_size’ and then set ‘reevaluate_minutes’ to a large enough interval to avoid too much build churn.</p>
+<p>Vespene cloud “Best Practices” would strongly encourage tagging all of your instances with “vespene_worker” and the name of the worker pool,
+and this is something you can set up in your automation if applicable.</p>
+<p>You don’t have to use any specific tool with the executor, and can easily launch your own scripts.</p>
+</div>
+<div class="section" id="image-preparation">
+<h2>Image Preparation<a class="headerlink" href="#image-preparation" title="Permalink to this headline">¶</a></h2>
+<p>If using the shell executor to deploy a cloud image it is VITAL to consider what must go
+into the image to make for a successful build</p>
+<p>When preparing a worker cloud image for autoscaling, make sure of the following:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>the image contains the same version of Vespene you are using for the web console</li>
+<li>the image contains a complete /etc/settings.d configuration as you would any other worker - especially secrets.py</li>
+<li>the image contains a configured build root in settings and this directory EXISTS</li>
+<li>the sudo user configured on the worker pool can write to the build root</li>
+<li>the image starts the worker pool script</li>
+<li>whatever environment the worker is deployed to has access to the Vespene database</li>
+<li>you are able to read the logs through use of some logfile aggregration service</li>
+<li>you are using triggers or a shared filesystem to access the build root after the builders terminate</li>
+<li>you don’t start the web interface (there’s no point to this, but won’t hurt anything).</li>
+<li>be sure any build tools you need are baked in to avoid a lot of internet traffic fetching them</li>
+</ol>
+</div></blockquote>
+<p>While having nothing to do with autoscaling, CI/CD ettiquette strongly encourages mirroring/caching any software dependencies
+locally at your place of business. If running a lot of builds, you don’t want to have build scripts that constantly ‘wget’ or ‘curl’ content or abusively re-download tools from online mirrors.</p>
+</div>
+<div class="section" id="the-worker-command-line">
+<h2>The Worker Command Line<a class="headerlink" href="#the-worker-command-line" title="Permalink to this headline">¶</a></h2>
+<p>Most importantly, the deployed image must start a worker.</p>
+<p>In many cases, it is fine to launch a lightweight container or image that will start one build and then exit.</p>
+<p>To do this, launch the worker as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">agent</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">python3</span><span class="o">&gt;</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">worker</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">builds</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">wait</span><span class="o">-</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span>
+</pre></div>
+</div>
+<p>To deploy a worker that runs a finite number of builds and then exits do something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">agent</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">python3</span><span class="o">&gt;</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">worker</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">builds</span><span class="o">=</span><span class="mi">10</span> <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">wait</span><span class="o">-</span><span class="n">minutes</span><span class="o">=</span><span class="mi">60</span>
+</pre></div>
+</div>
+<p>If your invocation does not have ‘declarativeness’ and is strictly going to allocate new workers without checking
+to see how many new workers to allocate, it is very important to not forget ‘–max-builds=1’. In this scenario
+you could rapidly consume a very large amount of cloud resources!</p>
+<p>It is possible that your automation script downsizing build capacity could terminate some running builds.
+If this is a concern, your cloud provider may provide some solutions such as <a class="reference external" href="https://aws.amazon.com/premiumsupport/knowledge-center/auto-scaling-delay-termination/">AWS Autoscaling Delay Termination</a>. In doing this, set the termination time to something like one hour, and also consider
+setting your termination policy to always terminate the oldest instances.</p>
+</div>
+<div class="section" id="multiple-workers-per-instance">
+<h2>Multiple Workers Per Instance<a class="headerlink" href="#multiple-workers-per-instance" title="Permalink to this headline">¶</a></h2>
+<p>Most users will not want multiple workers per instance.</p>
+<p>If you are asking for a particularly large instance with this autoscaling feature, you can run multiple workers per instance.</p>
+<p>Instead of directly launching the worker script like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">agent</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">python3</span><span class="o">&gt;</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">worker</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">builds</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">wait</span><span class="o">-</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span>
+</pre></div>
+</div>
+<p>You would instead use a tool like supervisor to launch multiple copies of the same worker script, still with the same parameters.</p>
+<p>Suppose you wanted to run four worker processes per instance.  In this situation, have the image launch the four worker processes,
+but change the multiplier in the worker pool configuration to 4.</p>
+<p>Make sure that supervisor is not set to restart the workers when they terminate, and when all four instances are down,
+supervisor itself should stop.</p>
+</div>
+<div class="section" id="running-the-autoscaling-engine">
+<h2>Running the Autoscaling Engine<a class="headerlink" href="#running-the-autoscaling-engine" title="Permalink to this headline">¶</a></h2>
+<p>A management process is required to monitor the worker pools and send off autoscaling requests.  This process should have access to any
+cloud commands you need to run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">autoscaler</span> <span class="o">--</span><span class="n">queue</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">queue</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Any plugins need to be abled in <a class="reference internal" href="settings.html#settings"><span class="std std-ref">Settings</span></a> and selected on the individual worker pools.</p>
+<p>To disable autoscaling for any worker, just hop over to the worker pool tab in the UI and uncheck the feature.</p>
+<p>This autoscaler process only needs to have one copy running per worker pool, and one process can easily oversee all of your
+worker pools if you want.  Executors <em>will</em> block until complete though, so if you want the highest levels of parallelism, consider
+starting one seperate autoscaler for each worker pool:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">autoscaler</span> <span class="o">--</span><span class="n">queue</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name1</span><span class="o">&gt;</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">autoscaler</span> <span class="o">--</span><span class="n">queue</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name2</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The tools log to standard output, so consider adding them to your supervisor configuration and redirecting the output to /var/log/vespene/
+if you wish. The autoscaler process is NOT set up by default in the stock Vespene setup scripts.</p>
+<p>If you need to run the autoscaling engine <em>now</em>, the force flag is helpful:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">autoscaler</span> <span class="o">--</span><span class="n">queue</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name1</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">force</span>
+</pre></div>
+</div>
+<p>The force flag will ignore any timing restrictions, run the scaling loop once, and then immediately exit.</p>
+<p>Additionally, there is a “–sleep” flag that takes an integer.  This is used to calculate how long to sleep between
+each calculation loop.  The default is 20 seconds.  The only point in this value is to avoid hammering the database.
+It has no meaning with –force.</p>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>Ephemeral workers will naturally be harder to debug than machines you can simply log into and explore.</p>
+<p>Making sure logs to /var/log/vespene (or standard out, as appropriate) are centralized will be important to
+understanding any errors in autoscaling. If you aren’t starting worker through supervisor, you’re not going to have
+/var/log/vespene by default and will have to log output on your own.  Redirecting to /var/log/vespene is reasonable.</p>
+<p>Once again, be sure triggers are configured to copy build roots once completed to a common location, or that a
+shared filesystem is in use.</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>We hope you find the autoscaling engine to be very flexible and very pluggable.</p>
+<p>If you are just getting Vespene started and learning how to use it, we first recommend you learn Vespene and make sure it is a tool for you, and that
+you are familiar with concepts. Try this feature <em>after</em> you are familiar with the basics and you should get along fine.</p>
+<p>This feature is also very new in Vespene, so please stop by talk.vespene.io with any ideas, questions, or feedback!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="authz.html" class="btn btn-neutral float-right" title="Authorization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="webhooks.html" class="btn btn-neutral" title="Webhooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

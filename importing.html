@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Importing Organizations &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Launch Questions" href="launch_questions.html" />
+    <link rel="prev" title="SSH Keys and Service Logins" href="access.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Imports (.vespene)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ui-configuration">UI Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-vespene-file">The .vespene file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#templating">Templating?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enforcing-limitations-on-change">Enforcing Limitations on Change</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#errors">Errors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Importing Organizations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/importing.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="importing-organizations">
+<span id="importing"></span><h1>Importing Organizations<a class="headerlink" href="#importing-organizations" title="Permalink to this headline">¶</a></h1>
+<p>Want to make the management of your build and automation environment more self-service?</p>
+<p>Particularly in huge microservice configurations, it often helps if multiple teams can define their projects
+in source code and not have to go into the build system to set them up or change a build script.</p>
+<p>With the “organizations” feature, Vespene can automatically pull in repository definitions from all of your GitHub (or in the future, other…) organizations.
+You can keep your build scripts 100% in source control, but still use the full power of Vespene templating and variables and snippets within them.</p>
+<p>Right now, this only works for GitHub organizations (including GitHub enterprise), and this feature will likely be expanded over time to support different source control vendors (such as GitLab) and more configuration flexibility.  Most of the code is generic, and small plugins deal with APIs to the particular repo indexes.</p>
+<div class="section" id="ui-configuration">
+<h2>UI Configuration<a class="headerlink" href="#ui-configuration" title="Permalink to this headline">¶</a></h2>
+<img alt="Example organization setup" class="align-left" src="_images/organization1.png" />
+<p>Only superusers can set up organizations in Vespene.</p>
+<p>To get started, in the user interface, add a new organization, and specify the organization identifier (the short name in the URL) and potentially the API endpoint.</p>
+<p>Select the Service Login (username and encrypted password) combo that you will use to connect to the source control host.  This will be used to list all
+of the remote repositories and collectively download the most recent tip of each repository.  When the project is built, the same login will be used
+to checkout those projects.</p>
+<p>Imports are set up to run periodically on particular workers, so you must set what machines perform this activity by choosing a worker pool.
+You will also need to specify how often to refresh the organizations.  If you want to import only once, you can set the
+refresh interval to 9 billion minutes or disable the organization after the first import.</p>
+<p>Most organizations will probably want to run the import process every 60 minutes or so, but if they have a lot of repositories they
+might want to go a bit slower.  Shallow checkouts are done to save bandwidth, and only the default branch is considered.</p>
+<p>Imports are periodic. If you need to rescan your repositories you can save the organization with the “force_rescan” checkbox enabled, and the organization will be reprocessed at the next available opportunity. Once you get a working import,  you can turn off imports in the organizational control panel if you want.</p>
+<p>When do imports happen?</p>
+<p>Imports are processed in-between workers regular build work, so if a build is ongoing and an import is over-due, it will be handled
+the next time a worker process becomes free, and before it runs another build.  This way, we make sure builds never starve the import
+process, and project configurations always have a chance to keep current.</p>
+<p>What is imported is normally controlled with a “.vespene” file in the root of each repository. This means only projects with a “.vespene” file will be
+imported - because we need a certain amount of information to be able to set those projects up.</p>
+<p>There is a configuration option that will create a stub project without a “.vespene” file.  This is mostly useful for demo scenarios to prove the import
+process “works”, rather than getting a configuration fully operational. It is however a good way to show Vespene fully populated to your boss.
+The imported configuration in this case won’t have build script, so using “.vespene” files is preferred.</p>
+<p>If you run an import again, changes in the .vespene file will be picked up.</p>
+</div>
+<div class="section" id="the-vespene-file">
+<h2>The .vespene file<a class="headerlink" href="#the-vespene-file" title="Permalink to this headline">¶</a></h2>
+<p>A source control project in a repository signals that it wants to be processed by defining a .vespene file in the build root.</p>
+<p>The file is in YAML format.</p>
+<p>Here is an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="s2">&quot;My Awesome Project&quot;</span>
+<span class="n">script</span><span class="p">:</span> <span class="s2">&quot;go.sh&quot;</span>
+<span class="n">timeout</span><span class="p">:</span> <span class="mi">6000</span>
+<span class="n">container_base_image</span><span class="p">:</span> <span class="s2">&quot;ubuntu&quot;</span>
+<span class="n">repo_branch</span><span class="p">:</span> <span class="n">master</span>
+<span class="n">webhook_enabled</span><span class="p">:</span> <span class="n">true</span>
+<span class="n">variables</span><span class="p">:</span>
+   <span class="n">asdf</span><span class="p">:</span> <span class="mi">1234</span>
+   <span class="n">luggage_code</span><span class="p">:</span> <span class="s1">&#39;5150&#39;</span>
+<span class="n">launch_questions</span><span class="p">:</span> <span class="p">[]</span>
+<span class="n">worker_pool</span><span class="p">:</span> <span class="s1">&#39;general&#39;</span>
+<span class="n">pipeline</span><span class="p">:</span> <span class="s1">&#39;finance&#39;</span>
+<span class="n">pipeline_definition</span><span class="p">:</span> <span class="p">[</span> <span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="s1">&#39;qa&#39;</span><span class="p">,</span> <span class="s1">&#39;release&#39;</span> <span class="p">]</span>
+<span class="n">stage</span><span class="p">:</span> <span class="s1">&#39;build&#39;</span>
+<span class="n">ownership_groups</span><span class="p">:</span> <span class="p">[</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="s1">&#39;qa&#39;</span> <span class="p">]</span>
+<span class="n">launch_questions</span><span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+<span class="n">launch_groups</span><span class="p">:</span> <span class="p">[</span> <span class="s1">&#39;support&#39;</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>What do each of these do?</p>
+<ul class="simple">
+<li>name - defines the name of the project</li>
+<li>script - this file is read to become the build script.  This is a path relative to the repo root</li>
+<li>timeout - the build will fail if it takes longer than this many number of seconds</li>
+<li>container_base_image - for container isolated builds, this sets the build environment</li>
+<li>repo_branch - this is the repo to be checked out by default when building the project</li>
+<li>webhook_enabled - enables <a class="reference internal" href="webhooks.html#webhooks"><span class="std std-ref">Webhooks</span></a></li>
+<li>variables - see <a class="reference internal" href="variables.html#variables"><span class="std std-ref">Variables</span></a></li>
+<li>launch_questions - see <a class="reference internal" href="launch_questions.html#launch-questions"><span class="std std-ref">Launch Questions</span></a></li>
+<li>worker_pool - this is the worker pool that will be used to build the project</li>
+<li>pipeline - the name of the pipeline. Can be created if it doesn’t exist depending on organization settings.</li>
+<li>pipeline_definition - the stages in the pipeline. Be careful that all projects sharing the pipeline use the same settings.</li>
+<li>stage - the stage in the pipeline where this project runs</li>
+<li>ownership_groups - who has permission to edit or delete the project? See <a class="reference internal" href="authz.html#authz"><span class="std std-ref">Authorization</span></a></li>
+<li>launch_groups - who has permission to launch/build the project? See <a class="reference internal" href="authz.html#authz"><span class="std std-ref">Authorization</span></a></li>
+</ul>
+<p>If any value is not set, it will assume the Vespene defaults.  There are no required parameters.
+The project will use the repository name if not set.</p>
+<p>This means the “.vespene” file CAN be mostly blank.</p>
+<p>Most defaults are Vespene defaults, though the default worker pool can be configured on the Organization object.
+More import-specific defaults may be added over time.</p>
+<p>Some cool things: Launch questions can also be defined, see <a class="reference internal" href="launch_questions.html#launch-questions"><span class="std std-ref">Launch Questions</span></a> for the specification.
+There isn’t a lot of validation on this field, so make sure you get it correct by trying to launch the project
+after you import it.</p>
+<p>One gotcha: The container_base_image parameter is only used when the worker pool selected is configured to use container isolation.
+Only admins can configure worker pools to do this.</p>
+</div>
+<div class="section" id="templating">
+<h2>Templating?<a class="headerlink" href="#templating" title="Permalink to this headline">¶</a></h2>
+<p>The “.vespene” files are NOT templated.  However, the script specified by the path in “script”, can contain Jinja2 template data.
+As per all build scripts in Vespene, it should contain a shell interpreter line, such as “#!/bin/bash”.</p>
+</div>
+<div class="section" id="enforcing-limitations-on-change">
+<h2>Enforcing Limitations on Change<a class="headerlink" href="#enforcing-limitations-on-change" title="Permalink to this headline">¶</a></h2>
+<p>In the Vespene UI, it is possible to limit whether projects are allowed to rename themselves, whether they can overwrite the build
+script once loaded into Vespene, and whether they can overwrite other configuration parameters.  In most cases, you can leave
+all of these controls ON if you trust developers. The most dangerous setting is perhaps “allow_pipeline_definition”, which can be
+used to create pipelines if they do not exist, or reorder or reassign their stages, as this could effect the build cycles
+of other projects.</p>
+<p>If you are supremely concerned about those with access to source control making unwanted changes, you can choose to not set up
+organizations in Vespene, or use them once and then delete the organization.</p>
+</div>
+<div class="section" id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
+<p>Every import will produce a “Build” object in Vespene.  You can look at builds to see a log of all of the import history.
+The Build itself will be marked “failure” if there are any errors at all to address, but will keep scanning to do as much
+as it can.  Just because one team makes an accidental error in a .vespene file does not mean the other teams should have to wait to
+get their changes applied.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="launch_questions.html" class="btn btn-neutral float-right" title="Launch Questions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="access.html" class="btn btn-neutral" title="SSH Keys and Service Logins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

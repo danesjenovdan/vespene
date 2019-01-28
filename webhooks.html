@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Webhooks &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Autoscaling" href="autoscaling.html" />
+    <link rel="prev" title="Scheduling" href="scheduling.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Webhooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-in-the-source-control-product">Configuration in the Source Control Product</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-in-vespene">Configuration in Vespene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-relays">Network Relays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Webhooks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/webhooks.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="webhooks">
+<span id="id1"></span><h1>Webhooks<a class="headerlink" href="#webhooks" title="Permalink to this headline">¶</a></h1>
+<p>Using webhooks, a source control system can trigger Vespene builds automatically when new code is pushed.</p>
+<div class="section" id="configuration-in-the-source-control-product">
+<h2>Configuration in the Source Control Product<a class="headerlink" href="#configuration-in-the-source-control-product" title="Permalink to this headline">¶</a></h2>
+<p>Webhooks must be configured in your source control system, and you should consult their documentation for how to set this up.</p>
+<p>Webhooks should point to <a class="reference external" href="http://your-vespene-server.example.com/webhooks">http://your-vespene-server.example.com/webhooks</a></p>
+<p>The URL you provide to something that generates webhooks will not change project by project.  Vespene looks at the payload of the webhook to find out what repo the event is “about”
+and then matches up the repositories mentioned with your project.</p>
+<p>Here are two very important things to consider:</p>
+<ul class="simple">
+<li>to avoid extra builds being triggered by extraneous events, only PUSH webhooks should be sent</li>
+<li>all webhooks should be configured to send JSON</li>
+</ul>
+<p>Vespene has been tested with GitHub and support for GitLab <em>should</em> work at this time. For some source control systems, Vespene may need a VERY
+minor set of code additions to be able to support it. We welcome ALL of these additions and can work with you to get these added in ASAP if you send
+us a link to the webhook documentation.</p>
+</div>
+<div class="section" id="configuration-in-vespene">
+<h2>Configuration in Vespene<a class="headerlink" href="#configuration-in-vespene" title="Permalink to this headline">¶</a></h2>
+<p>For each project that should respond to a webhook with a new build, the enable webhook checkbox must be checked no the project.
+This checkbox is OFF by default, so no one can just configure up a webhook externally and start making Vespene fire off builds.</p>
+<p>Additionally, there is an optional field, ‘webhook_token’.  Normally this is blank, but this provides as a <em>BASIC</em> but generic
+extra safeguard. If supplied, the token must match the query string of the webhook.</p>
+<p>For instance, if the token is set to “badwolf”, the URL for that project would have to be <a class="reference external" href="http://your-vespene-server.example.com/webhooks?token=badwolf">http://your-vespene-server.example.com/webhooks?token=badwolf</a> – you would use
+that URL instead of the generic webhook URL when setting the webhook up in git. If the webhook token doesn’t match, the webhook will not fire.</p>
+<p>The webhook token can be unique per project.</p>
+</div>
+<div class="section" id="network-relays">
+<h2>Network Relays<a class="headerlink" href="#network-relays" title="Permalink to this headline">¶</a></h2>
+<p>Often a Vespene server on a private network will want to recieve webhooks from a hosted source control management service.</p>
+<p>There are commercial solutions for this (I have tested webhookrelay.com and it works great), though you could also write a POST forwarder yourself if you have any internet-facing web application.  You would then only accept
+connections from your source control management system for the webhook URL, for example, the public IPs from github.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Push to your repository and see if a build was triggered.</p>
+<p>See the logs/output from Vespene if needed for debug information.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="autoscaling.html" class="btn btn-neutral float-right" title="Autoscaling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scheduling.html" class="btn btn-neutral" title="Scheduling" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Workers" href="workers.html" />
+    <link rel="prev" title="Setup" href="setup.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#initialization">Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging-in">Logging In</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intro-projects-builds">Intro: Projects &amp; Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intro-workers-worker-pools">Intro: Workers &amp; Worker Pools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intro-logins-ssh">Intro: Logins &amp; SSH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intro-templates">Intro: Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intro-pipelines">Intro: Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#intro-triggers">Intro: Triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#when-can-i-start-building-things">When Can I Start Building Things?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manually-building-a-project">Manually Building A Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline-experimentation">Pipeline Experimentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-secret-lesson-in-templates">A Secret Lesson In Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cleanup">Cleanup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="tutorial">
+<span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the tutorial! We are glad to have you here!</p>
+<p>We assume you have already ran the <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a> instructions and have a Vespene instance ready? If not, please
+make sure that is done first and then come back here.</p>
+<p>Ok? Good to go? Let’s start learning Vespene!</p>
+<div class="section" id="initialization">
+<h2>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h2>
+<p>As per the <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a>, you should have already run this once:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">tutorial_setup</span>
+</pre></div>
+</div>
+<p>This populates Vespene with some sample builds - they don’t do very much, and a basic configuration, to make it a bit more friendly when logging in
+for the first time.</p>
+<p>Should you ever delete the tutorial objects, you can re-run this command at any time to restore them.</p>
+</div>
+<div class="section" id="logging-in">
+<h2>Logging In<a class="headerlink" href="#logging-in" title="Permalink to this headline">¶</a></h2>
+<p>Visit the homepage and type in your username and password for the superuser account to login:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">servername</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Once you see the login page, enter your username and password, and you’ll be taken to the “Projects” screen,
+which should be very familiar if you’ve seen other build systems.</p>
+<p>For the most part, everything should be self explanatory to try out, or obvious enough to where you need to look
+in the web documentation.  If you find something tricky, let us know, so we can improve the tutorial.</p>
+</div>
+<div class="section" id="intro-projects-builds">
+<h2>Intro: Projects &amp; Builds<a class="headerlink" href="#intro-projects-builds" title="Permalink to this headline">¶</a></h2>
+<p>Across the top of the homepage, you’ll see all the types of objects in Vespene, the most important
+being “Projects” and “Builds”.</p>
+<p>The default Vespene view shows the <a class="reference internal" href="projects.html#projects"><span class="std std-ref">Projects</span></a> list, which you should be looking at now. A project represents a source code repository and/or a script to run.</p>
+<p>A project might be named something like “build-foo-app” or “production-deployer” or “backup-database” or anything you want to launch from a web interface. 90% of
+your projects are probably going to be source code builds, referred to in the industry as “CI”, or “Continuous Integration”, which has nothing to do with
+Calculus, and thankfully so, because we’ve forgotten how to do math.</p>
+<p>When projects are run, they create build objects.  Build objects track the status of the script execution, and can also be stopped or referred
+to for status.  Builds have return codes and output.  Build history can be cleared per instructions in <a class="reference internal" href="cli.html#cli"><span class="std std-ref">CLI</span></a>, so you don’t have to worry about
+thousands of build records piling up if you don’t want to.</p>
+<p>Builds can be triggered manually, but they don’t have to.  You may wish to read about <a class="reference internal" href="webhooks.html#webhooks"><span class="std std-ref">Webhooks</span></a> later, and builds can also be scheduled.</p>
+<p>Vespene conviently shows the latest build for each project as well as a link to show all prior builds for a project.  You can also start and
+stop project builds from this screen, but before we do that, let’s talk a little bit about workers.</p>
+</div>
+<div class="section" id="intro-workers-worker-pools">
+<h2>Intro: Workers &amp; Worker Pools<a class="headerlink" href="#intro-workers-worker-pools" title="Permalink to this headline">¶</a></h2>
+<p>Builds are executed by <a class="reference internal" href="workers.html#worker"><span class="std std-ref">Workers</span></a> nodes - processes that run on backend machines.</p>
+<p>Worker Pools are essentially named queues with a bit of additional configuration.  A project gets to pick what worker pool handles its builds.  Commonly, a worker pool will represent a named build
+environment like “Amazon Linux” or “FreeBSD”, and on that worker, all the tools needed to run builds for that environment will be installed on that environment.
+Even that is not even required in some cases, as you can also use a docker image to pull down your build environment. This is explained in more detail in the <a class="reference internal" href="workers.html#worker"><span class="std std-ref">Workers</span></a>
+documentation.</p>
+<p>If your workers are going to represent automation, rather than source code building, each of these might be named after a region or environment where the script would be run from.</p>
+<p>Because the tutorial is just a basic setup, the “tutorial_setup” command created a worker pool named “tutorial-pool”, and the <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a> instructions
+hopefully have a worker process running that will consume tutorial build requests.  You can check on this by looking at the supervisor configuration created in the /etc/vespene/ directory.</p>
+<p>Before you start a project though, you will need to first use the superuser account to edit the configuration for this worker pool.  A sudo_user and sudo_password are set up, and these
+may not be appropriate for your platform. Most likely they won’t be! To ignore security for now,  you can just set these to the username running the Vespene worker, but you would
+never do this in production.</p>
+<p>For instance, in a development setup on my Mac, I often “cheat” and just set the sudo username to my current username, and then no password is even required.  That’s not secure though, hence
+why we don’t want you to do that in production.  Remember to read the <a class="reference internal" href="security.html#security"><span class="std std-ref">Security Guide</span></a> instructions later.</p>
+<p>Just to review, you should have started a process like this (either manually or with supervisor via the init scripts):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">agent</span> <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">worker</span> <span class="n">tutorial</span><span class="o">-</span><span class="n">pool</span>
+</pre></div>
+</div>
+<p>While Vespene does also support <a class="reference internal" href="workers.html#container-isolation"><span class="std std-ref">Basic Container Isolation</span></a>, like we mentioned, we will be using <a class="reference internal" href="workers.html#sudo-isolation"><span class="std std-ref">Sudo Isolation</span></a> for the tutorial.  In other words, don’t touch the isolation setting
+on the worker pool, just set the sudo user to something.</p>
+<p>After changing the worker pool configuration you must restart the worker to get it to load the new configuration.</p>
+<p>Keep these setting in mind should a build fail during the tutorial, it is probably because you need to adjust sudo settings and permissions.
+The build scripts are otherwise not really complex, so that’s really the only reason they might fail until you start tweaking them or adding builds of your own.</p>
+<p>If the builds don’t run at all (and stay in queued state), you probably don’t have a worker pool running with the correct name.</p>
+<p>If you are still stuck, hop by the forum (talk.vespene.io) and we’ll try to help you through it.</p>
+</div>
+<div class="section" id="intro-logins-ssh">
+<h2>Intro: Logins &amp; SSH<a class="headerlink" href="#intro-logins-ssh" title="Permalink to this headline">¶</a></h2>
+<p>Projects often check out source code, and sometimes they do this with usernames and sometimes they use SSH keys.  We almost always prefer SSH keys for interacting
+with git, but as not everyone may agree (that’s fine), we support both.</p>
+<p>There are seperate objects for this in Vespene.  A project may use only one Service Login, but can have multiple SSH keys.  These SSH keys will be available when
+doing a checkout, but also when running any scripts - for instance, they are very useful for deployment scripts. Each of these are added to the UI using different
+views in the web interface.</p>
+<p>The tutorial builds don’t actually use any SSH keys, but setting them up should be self explanatory. Once you add an SSH key, you have to also configure
+the project to use it in the UI.</p>
+<p>So first you set the SSH key object up, give it a name, and pick that name under the project settings.</p>
+<p>The tutorial here doesn’t actually check out any private repos, so it didn’t bother setting any of that up.  We just wanted to make sure you knew
+what this was about.</p>
+<p>Hopefully that was an easy step, nothing to do, just some reading :)</p>
+</div>
+<div class="section" id="intro-templates">
+<h2>Intro: Templates<a class="headerlink" href="#intro-templates" title="Permalink to this headline">¶</a></h2>
+<p>Vespene build scripts can just be regular build scripts, but they can also be templated.</p>
+<p>This is a major key feature of Vespene, but if you decide to never use templates, that’s totally fine!</p>
+<p>Why templates? In any large built system, the copy and pasting of build scripts can become a major problem.  Templates can help ensure commonality between build scripts and
+make them easier to change. I’ve worked at a huge microservices setup in the past, and the ability to share pieces of text and variables between builds would have been
+a life saver - but we didn’t have anything like that.  Vespene is designed around making that better.</p>
+<p>How does it work?</p>
+<p>Within the scripts contained in a project, you can use {{jinja2}} template expressions to substitute variables and snippets, which
+are large chunks of reusable text (which can also themselves be templates). See <a class="reference internal" href="variables.html#variables"><span class="std std-ref">Variables</span></a> for more information.  If you have ever used
+certain automation systems you may already know Jinja2.  If not, it is very similar to other web templating systems, like maybe erb or Django default
+templating.</p>
+<p>Templating is all about substituting variables for text. Variables can be defined directly on a project or stage (which we’ll discuss later) but also in reusable buckets of configuration variables called
+Variable Sets.  If you want to use a lot of the same variables between multiple projects, Variable Sets and Snippets are the way to go.</p>
+<p>As described in the variable documentation, variables are also written into the buildroot into a ‘vespene.json’ file, and can be a great way to pass parameters to external
+programs that support JSON or YAML.</p>
+<p>Large chunks of text can be reused with <a class="reference internal" href="variables.html#snippets"><span class="std std-ref">Snippets</span></a>, so there’s a lot of power there too.</p>
+<p>With this variable handling, Vespene can help you tame a build environment of 100s of microservices because we designed it for exactly that problem.</p>
+</div>
+<div class="section" id="intro-pipelines">
+<h2>Intro: Pipelines<a class="headerlink" href="#intro-pipelines" title="Permalink to this headline">¶</a></h2>
+<p>Pipelines are how continuous deployment workflows are implemented in Vespene.</p>
+<p>Pipelines configure a chain of builds, where if all builds in one stage become successful the subsequent builds will then activate automatically in parallel.  Each step of a pipeline is called a stage, and typical
+stages are names like “build”, “test”, and “deploy”.</p>
+<p>Pipelines in Vespene are set up entirely using the web interface - no custom language or data format is required.</p>
+<p>This topic is later explored fully in <a class="reference internal" href="pipelines.html#pipelines"><span class="std std-ref">Pipelines</span></a>, but for now, we’ve just set up a pipeline you can click around and start.  It is not a good candidate of a real example, since
+there isn’t really any tests or deployment involved, but it shows how the builds chain into one another.</p>
+<p>In the real world, steps in a pipeline would probably build some software, test it, deploy it to a stage environment, test it further, then maybe deploy it to production.</p>
+</div>
+<div class="section" id="intro-triggers">
+<h2>Intro: Triggers<a class="headerlink" href="#intro-triggers" title="Permalink to this headline">¶</a></h2>
+<p>Vespene <a class="reference internal" href="plugins.html#plugins"><span class="std std-ref">Plugins</span></a> may include <a class="reference internal" href="plugins.html#triggers"><span class="std std-ref">Trigger Plugins</span></a> that can be used for triggering chat notifications
+and copying builds into published locations.</p>
+<p>If you want to notify your team members in Slack when a build runs or publish builds to s3, Triggers would be the way to go.</p>
+<p>There are both pre build and post build triggers, and they are fed a large amount of JSON context about the builds when they run. Triggers can be written in any language
+when using the command plugin, or can be implemented directly in Python.</p>
+</div>
+<div class="section" id="when-can-i-start-building-things">
+<h2>When Can I Start Building Things?<a class="headerlink" href="#when-can-i-start-building-things" title="Permalink to this headline">¶</a></h2>
+<p>Thanks for being patient!</p>
+<p>Earlier in the setup process you ran “python manage.py tutorial_setup”, which pre-created several objects in Vespene.</p>
+<p>These include:</p>
+<ul class="simple">
+<li>5 example projects</li>
+<li>1 pipeline</li>
+<li>1 worker pool</li>
+<li>3 user groups</li>
+<li>2 variable sets</li>
+<li>2 snippets</li>
+<li>4 pipeline stages</li>
+</ul>
+<p>We’re now ready to explore these in a bit more detail.</p>
+<p>This is a bit of a “free range” tutorial, expecting you to click around and read documentation to understand what everything does.</p>
+</div>
+<div class="section" id="manually-building-a-project">
+<h2>Manually Building A Project<a class="headerlink" href="#manually-building-a-project" title="Permalink to this headline">¶</a></h2>
+<p>To build a project, click the play icon on the project row.</p>
+<p>Build the “minimal-project” now by clicking on the play icon.</p>
+<p>Click the build number beside the project to see the status.</p>
+<p>You’ll note at this time the project doesn’t auto-refresh because we haven’t implemented websockets yet (coming!) - but that is coming.</p>
+<p>Reload the build page and you should see the project is now queued.</p>
+<p>When the build process picks it up a worker will move it into “running” state.</p>
+<p>You can click on the “builds” icon next to any project to see the build history of that project, or can just click on the current build to see
+the status of that particular build.</p>
+<p>You can stop a project when it is in queued or running state by clicking the stop icon on either the project or build page.</p>
+<p>The build will output content to the configured build root on each worker in settings.py.</p>
+<p>If you want to notify someone when a build starts, succeeds, or fails, you can set that up using <a class="reference internal" href="plugins.html#triggers"><span class="std std-ref">Trigger Plugins</span></a> later.
+Vespene, for instance, ships with a basic Slack plugin. If you want to write a plugin that mails someone a postcard, that too is technically
+possible with the right API.</p>
+</div>
+<div class="section" id="pipeline-experimentation">
+<h2>Pipeline Experimentation<a class="headerlink" href="#pipeline-experimentation" title="Permalink to this headline">¶</a></h2>
+<p>Now that you’ve experimented with the example tutorial project, click over to the Pipelines view and then click the “map” icon by the pipeline.</p>
+<p><a class="reference internal" href="pipelines.html#pipelines"><span class="std std-ref">Pipelines</span></a> are chains of builds, where if all builds complete in one stage, the rest of the builds trigger automatically.
+While usuable for many things, pipelines are most notably the basis for continuous deployment in Vespene.</p>
+<p>Normally we would expect to see <a class="reference internal" href="webhooks.html#webhooks"><span class="std std-ref">Webhooks</span></a> automatically start our pipeline, but since this is just the tutorial we haven’t set any up yet.</p>
+<p>You will notice that running the first project in the pipeline, if they are successful, will run all the projects in the pipeline.</p>
+<p>If the pipelines are still running, reload the page and you should eventually see all stages queue up and complete.</p>
+</div>
+<div class="section" id="a-secret-lesson-in-templates">
+<h2>A Secret Lesson In Templates<a class="headerlink" href="#a-secret-lesson-in-templates" title="Permalink to this headline">¶</a></h2>
+<p>So we’ve already mentioned templates, are there any examples of how to use them?</p>
+<p>Our pipeline builds actually contained a hidden set of lessons about templates (if not somewhat arbitrary), which we’ll talk about now.</p>
+<p>Each build script for the pipeline teaches some lessons about templating.  Click on each project to read the build scripts, and then find the build output.</p>
+<p>This will also give you a chance to get used to the navigation.</p>
+<p>The variables in these builds are described in the comments of the build script, but you can see we are leveraging <a class="reference internal" href="variables.html#variables"><span class="std std-ref">Variables</span></a>.</p>
+<p>The build system also writes variables into a “vespene.json” file in the build root, so you can even use Vespene to globally define feature flags for your production applications.</p>
+</div>
+<div class="section" id="cleanup">
+<h2>Cleanup<a class="headerlink" href="#cleanup" title="Permalink to this headline">¶</a></h2>
+<p>You can clean up and remove the objects the tutorial_setup script created whenever you like.</p>
+<p>Run the setup command any time you like if you would like to restore them.</p>
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>The tutorial document was here to explain some basic concepts as you clicked around the Vespene UI.  Please check out the rest of the documentation on topics
+that interest you to learn more.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="workers.html" class="btn btn-neutral float-right" title="Workers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup.html" class="btn btn-neutral" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

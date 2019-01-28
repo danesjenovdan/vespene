@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Workers &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Projects" href="projects.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-builds-work">How Builds Work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-support">Platform Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#worker-pools">Worker Pools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-build-flow">The Build Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fileserving">Fileserving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#isolation-modes">Isolation Modes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Workers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/workers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="workers">
+<span id="worker"></span><span id="id1"></span><h1>Workers<a class="headerlink" href="#workers" title="Permalink to this headline">¶</a></h1>
+<p>This page goes into more detail about what happens when a build runs, and a bit more about the strategy of managing worker processes in Vespene.</p>
+<p>As a refresher, Vespene is a horizontally scalable application.  Every node runs a copy of the web interface, and can run one or more worker processes.</p>
+<p>Setup and configuration of workers is also described in <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a>.</p>
+<div class="section" id="how-builds-work">
+<h2>How Builds Work<a class="headerlink" href="#how-builds-work" title="Permalink to this headline">¶</a></h2>
+<p>Workers in Vespene run scripts that are set on <a class="reference internal" href="projects.html#projects"><span class="std std-ref">Projects</span></a>. Any project can be triggered manually, or by change from a webook (see <a class="reference internal" href="webhooks.html#webhooks"><span class="std std-ref">Webhooks</span></a>).
+When a project is triggered, a build object is created in the QUEUED state, which is picked up by a worker
+serving the named “Worker Pool” assigned to that project.</p>
+<p>If, for example, a project is set to use the “general” worker pool, only workers farming the “general”
+queue can pick up builds for that project.  Similarly, if the project is set to use the “AmazonLinux”
+worker pool, only workers farming the “AmazonLinux” queue will pick up those builds. Thus the “Worker Pool”
+setting on each project is very important.</p>
+<p>If you are just using Vespene to build software, you can think of workers as “builders” - but they might also run
+arbitrary automation scripts of any kind. Generally speaking, they do “work”.</p>
+<p>If you ran the tutorial, the “tutorial_setup” command already created one worker pool. You can delete it if you are no longer
+using it.</p>
+<p>Just creating a worker pool doesn’t allocate any workers to a pool.  This happens when a worker starts up, on the command line the worker says
+“I am going to serve this queue”, and then it starts looking for work on that queue. We’ll get into that in a bit.</p>
+<p>Once a build is dequeued by a worker, the system will check out any configured repository into a working directory (if so configured) and then run the results of the script
+as templated through the <a class="reference internal" href="variables.html#variables"><span class="std std-ref">Variables</span></a> system.</p>
+</div>
+<div class="section" id="platform-support">
+<h2>Platform Support<a class="headerlink" href="#platform-support" title="Permalink to this headline">¶</a></h2>
+<p>It is important to note that the builders have been developed for OS X, BSD, and Linux operating systems, and have not been tested on windows at this
+point. We openly welcome community contributions for windows builder support.  This will probably require some <em>very minor</em>
+changes to add a new isolation mode, which is discussed below. Let’s talk about this on the forum!</p>
+</div>
+<div class="section" id="worker-pools">
+<span id="id2"></span><h2>Worker Pools<a class="headerlink" href="#worker-pools" title="Permalink to this headline">¶</a></h2>
+<img alt="Worker Pool List" class="align-right" src="_images/worker_pool1.png" />
+<p>Ok, so we’ve gone over that Worker Pools are named queues that run builds assigned to them, and have one or more worker processes (see <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a>) farming work off the queue for them.</p>
+<p>Worker pools will most commonly be named by operating system.</p>
+<p>Configuration of the worker includes security settings:</p>
+<img alt="Worker Pool Config" class="align-left" src="_images/worker_pool2.png" />
+<p>As mentioned in <a class="reference internal" href="development_setup.html#development-setup"><span class="std std-ref">Development Setup</span></a> the worker is launched as follows:</p>
+<blockquote>
+<div>ssh-agent python manage.py worker &lt;worker-pool-name&gt;</div></blockquote>
+<p>If following the <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a> instructions, setup will create a supervisord configuration in /etc/vespene that will automatically launch several worker processes for you,
+and this supervisor configuration itself will be launched by the operating system init system (for instance, systemd on CentOS 7).</p>
+<p>The process does not daemonize and logs to standard output.</p>
+<p>Any number of worker processes may be run on any machine - so if you
+want 5 worker processes, then start 5 worker processes.  You could easily start 5 workers for one type of queue and 3 for another type of queue, all on the same
+machine.</p>
+<p>You can start multiple workers on different machines too, they should use the same codebase and have the same
+settings.py.  The <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a> process talks about this.</p>
+</div>
+<div class="section" id="the-build-flow">
+<h2>The Build Flow<a class="headerlink" href="#the-build-flow" title="Permalink to this headline">¶</a></h2>
+<p>So, let’s talk about the build process some more, in greater depth.</p>
+<p>When a worker decides to “claim” a build, it moves that build from QUEUED into RUNNING state.</p>
+<p>First, the build system will run any configured <a class="reference internal" href="plugins.html#triggers"><span class="std std-ref">Trigger Plugins</span></a> which will prepare for the start of
+the build, such as sending a chat announcement or running some configured shell commands. Triggers are plugins,
+they can do anything, but they do run from the worker machines.</p>
+<p>A working directory is then prepared using the build root configured in settings.py, named after the build number.</p>
+<p>The worker will then add any <a class="reference internal" href="access.html#ssh"><span class="std std-ref">SSH Keys</span></a> associated with the project before running the build.</p>
+<p>The worker will then perform any source control checkouts using any <a class="reference internal" href="access.html#service-logins"><span class="std std-ref">Service Logins</span></a> or <a class="reference internal" href="access.html#ssh"><span class="std std-ref">SSH Keys</span></a>,
+but not all build scripts are required to have a repo associated with them.  They could just run a simple script
+without a checkout (if the project SCM type is set to “none”).</p>
+<p>Then, after checkout (if needed), the worker will attempt to isolate the build script.  At this point in Vespene’s development, there are two
+isolation modes, described in the next section. You can also read a little more about security and why isolation is important
+in <a class="reference internal" href="security.html#security"><span class="std std-ref">Security Guide</span></a>.</p>
+<p>The build script at this point has already been templated (see <a class="reference internal" href="variables.html#templates"><span class="std std-ref">Templates</span></a>), so the build script
+then kicks off the build.</p>
+<p>As the build runs, the build output is continually updated.</p>
+<p>While the build runs, output is stored back in the database.  If a build stop was requested, the worker will pick up on that and terminate
+it at the next available opportunity.  Builds can also be terminated for taking too long to run, which is also configurable on a per project
+basis.</p>
+<p>Finally, the build status and end time are recorded and we are ready to run triggers that announce the
+end of the build process.</p>
+<p>These <a class="reference internal" href="plugins.html#triggers"><span class="std std-ref">Trigger Plugins</span></a> may also be in charge of publishing the build contents.</p>
+</div>
+<div class="section" id="fileserving">
+<span id="id3"></span><h2>Fileserving<a class="headerlink" href="#fileserving" title="Permalink to this headline">¶</a></h2>
+<p>It’s great to run a build, but what do you do with the output?  How do you see what happened and get your files?</p>
+<p>Buildroots can be shared with users of Vespene in one of two ways.</p>
+<p>First, a trigger (see <a class="reference internal" href="plugins.html#triggers"><span class="std std-ref">Trigger Plugins</span></a>) could be configured to copy a build root to a public location, for instance, a HTTP+NFS server, s3, or so on.
+If doing this,  configure BUILD_WEBROOT_LINK in <a class="reference internal" href="settings.html#settings"><span class="std std-ref">Settings</span></a> and a link to this location will appear in the user interface, pointing
+to each build.  The link will be a globe icon.  This is a very high-performant way to serve results and will keep all your files - from all the different
+workers, in one place.  It requires a bit more setup, but it’s easy to do.</p>
+<p>Alternately, each Vespene worker can serve up their own builds using their own web server. To do this, configure the <a class="reference internal" href="settings.html#settings"><span class="std std-ref">Settings</span></a> on each worker
+to leave FILESERVING_ENABLED on. Vespene workers will automatically register
+their ports and hostnames each time a build is run. If the hostname that comes up in auto-registration is not correct (hostname detection can be weird!),
+you can explicitly set the FILESERVING_HOSTNAME and FILESERVING_PORT in settings. Then, when you click on the globe icon for each server, you will be
+taken to the worker machine that hosts those files, and that worker will serve those files up to you.</p>
+<p>For larger setups with lots of users, we eventually recommend switching to the first method.</p>
+</div>
+<div class="section" id="isolation-modes">
+<span id="isolation"></span><h2>Isolation Modes<a class="headerlink" href="#isolation-modes" title="Permalink to this headline">¶</a></h2>
+<p>This has been mentioned in a few other places.</p>
+<p>Builds can be isolated from each other in one of two ways.  More isolation types will be added over time.</p>
+<div class="section" id="sudo-isolation">
+<span id="id4"></span><h3>Sudo Isolation<a class="headerlink" href="#sudo-isolation" title="Permalink to this headline">¶</a></h3>
+<p>The first mode, sudo, switches to a sudo user before running the build script.  This mode comes with few dependencies and is easy
+to set up. On the worker pool, the sudo_user must be configured, and this user as described in the <a class="reference internal" href="security.html#security"><span class="std std-ref">Security Guide</span></a> must NOT
+have access to read the Vespene configuration files.</p>
+</div>
+<div class="section" id="basic-container-isolation">
+<span id="container-isolation"></span><h3>Basic Container Isolation<a class="headerlink" href="#basic-container-isolation" title="Permalink to this headline">¶</a></h3>
+<p>The second mode is “basic_container” and conducts the build in the context of a “docker build” execution, with the build script
+run in a subdirectory of a squeaky clean docker image.  You can define the base image to use for the build on a project-by-project
+basis. One downside to this isolation mode is that SSH keys are not made available to the docker process <em>after</em> the checkout, so if you
+are running cloud commands that need SSH keys (for instance), it’s better to leave those builds using a worker pool that uses
+the sudo isolation mode.  Actual code builds however, work fine.  This mode uses the local docker tools on the build machine
+and <em>DOES NOT</em> require anything like kubernetes, docker swarm, or other infrastructure.</p>
+<p>Other isolation modes, most likely things like LXC or jails, will be added in the near future.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="projects.html" class="btn btn-neutral float-right" title="Projects" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

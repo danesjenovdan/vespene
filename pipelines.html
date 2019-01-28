@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pipelines &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Scheduling" href="scheduling.html" />
+    <link rel="prev" title="Launch Questions" href="launch_questions.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pipelines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#stages">Stages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pipeline-objects">Pipeline Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-projects">Configuring Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#triggering-the-pipeline">Triggering the Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#communicating-between-builds">Communicating Between Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interaction-with-launch-questions">Interaction with Launch Questions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-failures">Handling Failures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opting-out">Opting Out</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Pipelines</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pipelines.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="pipelines">
+<span id="id1"></span><h1>Pipelines<a class="headerlink" href="#pipelines" title="Permalink to this headline">¶</a></h1>
+<p>Pipelines are a method of triggering one or more jobs, in stages, when other jobs complete.  A build system is already a “continuous integration” system, so pipelines extend it to become the hub of
+a “continuous deployment” system.</p>
+<p>Vespene pipelines are created graphically, without any special language or data format, but projects may add themselves
+to pipelines using .vespene files (see <a class="reference internal" href="importing.html#importing"><span class="std std-ref">Importing Organizations</span></a>) dynamically if so configured.</p>
+<p>Builds in a pipeline can intelligently pass variables between one another using <a class="reference internal" href="variables.html#output-variables"><span class="std std-ref">Output Variables</span></a>.</p>
+<div class="section" id="stages">
+<h2>Stages<a class="headerlink" href="#stages" title="Permalink to this headline">¶</a></h2>
+<p>To use pipelines, each project must be assigned to a build “stage”.</p>
+<p>A build stage is simply a named step in a pipeline.</p>
+<p>As an example scenario, a Vespene admin such as yourself may create the following stages:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Build</li>
+<li>Test</li>
+<li>Stage</li>
+<li>Deploy</li>
+</ul>
+</div></blockquote>
+<p>“Stage” is an unfortunately confusing for a name of a stage.  In the industry, we often mean “Stage” to refer to a staging environment that
+simulates production as “stage”.  When we say “Vespene stage” here, we mean a pipeline <em>step</em>, like each stage of a rocket separation.</p>
+<p>Ok, so, if you ran the “tutorial_setup” command mentioned in the <a class="reference internal" href="tutorial.html#tutorial"><span class="std std-ref">Tutorial</span></a>, you already have
+some stage names set up.  If not, you’ll need to make some by going into the Stage tab as a superuser and adding some.</p>
+</div>
+<div class="section" id="pipeline-objects">
+<h2>Pipeline Objects<a class="headerlink" href="#pipeline-objects" title="Permalink to this headline">¶</a></h2>
+<p>Once that the stages are defined, you can click on “Pipelines” at the top of the Vespene UI and start
+defining a pipeline.</p>
+<p>Vespene also shows the list of all the current pipelines that may exist.</p>
+<img alt="Pipelines list" class="align-left" src="_images/pipeline1.png" />
+<p>In our CI/CD example, we would normally create one pipeline for each type of service we have.  For instance,
+we might have a “Analytics” pipeline and a “Finance” pipeline.  Thus pipeline names are most frequently
+going to be named after service names.</p>
+<p>If you have a giant ton of microservices, this might be a lot of pipelines. Sorry about that!
+We might make some way to automate that setup later.</p>
+<p>Pipelines can have up to seven stages, each executed in order.</p>
+<p>Here’s an example stage configuration:</p>
+<img alt="Stage configuration" class="align-left" src="_images/pipeline2.png" />
+<p>If you have a bunch of pipelines with the same configuration, don’t be confused.  We assign projects to each step of the pipeline
+inside the project tab. We’ll do that next.</p>
+</div>
+<div class="section" id="configuring-projects">
+<h2>Configuring Projects<a class="headerlink" href="#configuring-projects" title="Permalink to this headline">¶</a></h2>
+<p>Once the Pipeline and Stages are set up, we have to add each project to the pipeline.</p>
+<p>In doing so, we go into the Project definition and assign it to both a pipeline and a stage.</p>
+<p>For instance, for a “finance-backend-code” project, that would likely get assigned to the “finance” pipeline and the “build” stage.</p>
+</div>
+<div class="section" id="triggering-the-pipeline">
+<h2>Triggering the Pipeline<a class="headerlink" href="#triggering-the-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>No special action is required to trigger a pipeline.  When all builds in pipeline are completed and successful, all the builds
+in the next stage of the pipeline automatically trigger.</p>
+<p>If any of the pipeline stages have failed, the next items in the step will not run.</p>
+<p>Builds can be triggered with the play button beside the project name or with <a class="reference internal" href="webhooks.html#webhooks"><span class="std std-ref">Webhooks</span></a>.</p>
+</div>
+<div class="section" id="communicating-between-builds">
+<h2>Communicating Between Builds<a class="headerlink" href="#communicating-between-builds" title="Permalink to this headline">¶</a></h2>
+<p>You can use <a class="reference internal" href="variables.html#output-variables"><span class="std std-ref">Output Variables</span></a> to read in variables set by previous stages of the pipeline, as well
+as write variables into the next stage. Review the variables documentation thoroughly to see what all is possible.</p>
+</div>
+<div class="section" id="interaction-with-launch-questions">
+<h2>Interaction with Launch Questions<a class="headerlink" href="#interaction-with-launch-questions" title="Permalink to this headline">¶</a></h2>
+<p>Pipelines are designed for automated use - as such, any <a class="reference internal" href="launch_questions.html#launch-questions"><span class="std std-ref">Launch Questions</span></a> are currently ignored when triggered by pipelines.</p>
+<p>There is one case where you might care about them though.</p>
+<p>Suppose you have a “build_app” and a “deploy_app” project, in different stages of the same pipeline.</p>
+<p>Say that normally, build_app uses <a class="reference internal" href="variables.html#output-variables"><span class="std std-ref">Output Variables</span></a> to pass the image ID it creates to a generic project named ‘deploy_app’.</p>
+<p>If you want to run the deploy step without retriggering the build step, you could assign some launch questions to the deploy_app project, asking
+for the same variable_name that normally comes from the output variable.</p>
+<p>When run manually, the “deploy_app” project would ask for the questions to be answered that it would normally get from the pipeline <a class="reference internal" href="variables.html#output-variables"><span class="std std-ref">Output Variables</span></a>.
+Use the same names, and the project can work either triggered form the pipeline or manually!</p>
+</div>
+<div class="section" id="handling-failures">
+<h2>Handling Failures<a class="headerlink" href="#handling-failures" title="Permalink to this headline">¶</a></h2>
+<p>Suppose one of the intermediate builds of a pipeline fails and then the error is fixed.  Does the whole pipeline have to be
+restarted?</p>
+<p>It does not.  Start the build in question and the rest of the pipeline can finish as normal.  If you do not want
+to retrigger that particular build and DO want to run the entire pipeline, simply kick the project that is part of the first
+stage instead.</p>
+</div>
+<div class="section" id="opting-out">
+<h2>Opting Out<a class="headerlink" href="#opting-out" title="Permalink to this headline">¶</a></h2>
+<p>To temporarily run a project without triggering the whole pipeline, it is not required to remove the project from the pipeline.
+Simply disable the pipeline in the configuration of that project.</p>
+<p>The whole pipeline can also be disabled directly.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scheduling.html" class="btn btn-neutral float-right" title="Scheduling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="launch_questions.html" class="btn btn-neutral" title="Launch Questions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

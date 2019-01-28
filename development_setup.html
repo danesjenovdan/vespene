@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development Setup &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Development Guide" href="development_guide.html" />
+    <link rel="prev" title="Community Resources" href="resources.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#git-checkout">Git Checkout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#os-x-python-3-x-setup">OS X Python 3.X Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#os-x-keychain">OS X Keychain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-dependencies">Other Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-dependencies">Python Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#postgresql-database-setup">PostgreSQL Database Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#django-setup">Django Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-schema">Database Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secret-file">Secret File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#superuser-account">Superuser Account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-setup">Tutorial Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#worker-setup">Worker Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-upgrades">Development Upgrades</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Development Setup</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/development_setup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="development-setup">
+<span id="id1"></span><h1>Development Setup<a class="headerlink" href="#development-setup" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a> guide details production deployment setup of Vespene, but this document talks about
+developer setup.</p>
+<p>Vespene can be developed easily on any Linux/Unix system or OS X.  The core application primarily <em>is</em> developed
+on OS X.  Where those setup processes deviate from Linux, we’ll call those steps out.</p>
+<div class="section" id="git-checkout">
+<h2>Git Checkout<a class="headerlink" href="#git-checkout" title="Permalink to this headline">¶</a></h2>
+<p>First grab the master branch from github:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">vespene</span><span class="o">-</span><span class="n">io</span><span class="o">/</span><span class="n">vespene</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="os-x-python-3-x-setup">
+<h2>OS X Python 3.X Setup<a class="headerlink" href="#os-x-python-3-x-setup" title="Permalink to this headline">¶</a></h2>
+<p>You’ll need a newer Python but this is easy. Vespene is written for Python 3.7 or greater.</p>
+<p>For OS X, this is easy to install from homebrew. For other operating systems substitute
+the appropriate commands to install Python 3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>Vespene also uses the timeout command, which you can get from coreutils as ‘gtimeout’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">coreutils</span>
+</pre></div>
+</div>
+<p>You will then want to make sure Python 3 is in your path, if not already, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># vim ~/.bashrc
+export path=/usr/local/bin:$PATH
+alias python /usr/local/bin/python3
+</pre></div>
+</div>
+<p>This may change a bit depending on what your distribution calls Python 3.  If you are on CentOS for example,
+python3 is available in yum, if you install the “epel-release” package.</p>
+<p>Activate your new path:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">~/.</span><span class="n">bashrc</span>
+</pre></div>
+</div>
+<p>Now install virtualenv so your Python installation can download dependencies locally, instead
+of globally:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">easy_install</span><span class="o">-</span><span class="mf">3.7</span> <span class="n">virtualenv</span>
+<span class="n">virtualenv</span> <span class="n">env</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python3</span>
+</pre></div>
+</div>
+<p>And now activate the virtualenv:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p>Future commands you run while this virtualenv is active will automatically use the right python.
+If you start new terminal windows, don’t forget to activate the virtualenv, or missing dependencies
+will cause errors to pop up.</p>
+</div>
+<div class="section" id="os-x-keychain">
+<h2>OS X Keychain<a class="headerlink" href="#os-x-keychain" title="Permalink to this headline">¶</a></h2>
+<p>In a very specific example of invalid project setups (where the <a class="reference external" href="https://">https://</a> username is not provided), Mac worker
+builds can go interactive.</p>
+<p>To disable this, run the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">credential</span><span class="o">-</span><span class="n">osxkeychain</span> <span class="n">erase</span>
+</pre></div>
+</div>
+<p>Then type in the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">host</span><span class="o">=</span><span class="n">github</span><span class="o">.</span><span class="n">com</span>
+<span class="n">protocol</span><span class="o">=</span><span class="n">https</span>
+<span class="p">[</span><span class="n">Press</span> <span class="n">Return</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This will not happen in Linux/Unix environments.</p>
+</div>
+<div class="section" id="other-dependencies">
+<h2>Other Dependencies<a class="headerlink" href="#other-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Vespene can isolate builds using either sudo or docker.</p>
+<p>If you are working on the worker code, you’ll probably want to go ahead and install docker, as even if you use it doesn’t hurt much.
+We don’t actually use docker for anything in the development or deployment process, just as a utility to constrain build environments.</p>
+<p>If on a Mac, find and install “Docker for Mac” and the docker support will be fully functional just
+like the Linux version.</p>
+</div>
+<div class="section" id="python-dependencies">
+<h2>Python Dependencies<a class="headerlink" href="#python-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>From the checkout directory, once the virtualenv is activated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">requirements</span>
+</pre></div>
+</div>
+<p>This step isn’t OS X specific. You’ll probably need gcc though, if you don’t have it and are on a Mac,
+you can get it from homebrew:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">gcc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="postgresql-database-setup">
+<h2>PostgreSQL Database Setup<a class="headerlink" href="#postgresql-database-setup" title="Permalink to this headline">¶</a></h2>
+<p>You’ll need to install PostgreSQL first if you haven’t already.  I like Postgresql.app for Mac development
+but the database can run anywhere.</p>
+<p>From a working PostgreSQL installation, create a new database:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># createdb vespene</span>
+</pre></div>
+</div>
+<p>Next we’ll need to create a user that can interact with the database:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># psql</span>
+</pre></div>
+</div>
+<p>From the postgresql shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># CREATE USER vespene WITH PASSWORD &#39;your-password&#39;;</span>
+</pre></div>
+</div>
+<p>Grant the vespene user full access to the PostgreSQL database:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">PRIVILEGES</span> <span class="n">ON</span> <span class="n">DATABASE</span> <span class="s2">&quot;vespene&quot;</span> <span class="n">to</span> <span class="n">vespene</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Remember the password used above.</p>
+</div>
+<div class="section" id="django-setup">
+<h2>Django Setup<a class="headerlink" href="#django-setup" title="Permalink to this headline">¶</a></h2>
+<p>Since Vespene is a Django app, the configuration file is in Python format.</p>
+<p>Add the following content in something like /etc/vespene/settings.d/database.py or (in the checkout) vespene/local_settings.py, neither
+of which probably exists on your filesystem yet:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.db.backends.postgresql&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;vespene&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;vespene&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;PASSWORD&#39;</span> <span class="p">:</span> <span class="s1">&#39;your-password&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ATOMIC_REQUESTS&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>These settings will also need to be copied to other workers if you are testing a multi-node setup.</p>
+<p>Also add an entry describing where the temporary build root should be for builds occurring on this system, perhaps in
+/etc/vespene/settings.d/workers.py:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BUILD_ROOT</span> <span class="o">=</span> <span class="s2">&quot;/tmp/vespene/build_root&quot;</span>
+</pre></div>
+</div>
+<p>The path can be any path, but it must exist and be writable by the user running the worker process, and if so
+configured, the sudo_user set as described in <a class="reference internal" href="workers.html#workers"><span class="std std-ref">Workers</span></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">vespene</span><span class="o">/</span><span class="n">build_root</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="database-schema">
+<h2>Database Schema<a class="headerlink" href="#database-schema" title="Permalink to this headline">¶</a></h2>
+<p>Once the database and settings.py have been configured, run the migration step from your checkout directory to create
+the initial database tables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">migrate</span>
+</pre></div>
+</div>
+<p>This command is also used later for database upgrades and can be re-run at any time.</p>
+</div>
+<div class="section" id="directory-structure">
+<h2>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>Normally created by the setup automation, the following directories need to be created:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">vespene</span><span class="o">/</span><span class="n">settings</span><span class="o">.</span><span class="n">d</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">vespene</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="secret-file">
+<h2>Secret File<a class="headerlink" href="#secret-file" title="Permalink to this headline">¶</a></h2>
+<p>Vespene has some built-in encryption of database secrets, and also needs a Django secret key.  To create this run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">secrets</span>
+</pre></div>
+</div>
+<p>This file is saved in /etc/vespene/settings.d/secrets.py and should never be checked into source control.  Permissions on
+this file are discussed in <a class="reference internal" href="security.html#security"><span class="std std-ref">Security Guide</span></a>.</p>
+</div>
+<div class="section" id="superuser-account">
+<h2>Superuser Account<a class="headerlink" href="#superuser-account" title="Permalink to this headline">¶</a></h2>
+<p>You will also need to create a superuser account for the Vespene administrator user. Remember the username and password you choose:</p>
+<blockquote>
+<div>python manage.py createsuperuser</div></blockquote>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>You may now run the development-mode webserver:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</pre></div>
+</div>
+<p>See if you can login at <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> with the username and password you chose.</p>
+</div>
+<div class="section" id="tutorial-setup">
+<h2>Tutorial Setup<a class="headerlink" href="#tutorial-setup" title="Permalink to this headline">¶</a></h2>
+<p>Want to use the tutorial?</p>
+<p>To make the objects the tutorial needs, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">tutorial_setup</span>
+</pre></div>
+</div>
+<p>This command will not ask any questions and just primes the system with some sample objects.</p>
+<p>This will create a worker pool named “general”, which is enough to run a worker
+in the next step.</p>
+<p>We will go ahead and set up that worker process.</p>
+</div>
+<div class="section" id="worker-setup">
+<h2>Worker Setup<a class="headerlink" href="#worker-setup" title="Permalink to this headline">¶</a></h2>
+<p>Workers can be run on any machine and you can have any number of them.  These are the distributed processes that
+actually perform the builds.</p>
+<p>Workers use the exact same code and settings used for the web application, and access the same database server.</p>
+<p>To run a worker, launch the process as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">agent</span> <span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">worker</span> <span class="o">&lt;</span><span class="n">worker</span><span class="o">-</span><span class="n">pool</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For instance, now that we have a worker pool named general:</p>
+<blockquote>
+<div>ssh-agent python manage.py worker general</div></blockquote>
+<p>This starts 1 new worker process on the machine, severing the pool named “general”.  The process will log
+to the foreground.</p>
+<p>The ‘ssh-agent’ wrapper command allows Vespene to handle SSH key additions automatically and is required.</p>
+<p>Plugins are run both on the worker and the client, depending on the plugin, so when you start
+reading about <cite>plugins</cite>, be aware you’ll need to apply some of those changes on the workers.</p>
+<p>Production installations use supervisord to corral multiple worker processes, as described in <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Setup</span></a>.</p>
+</div>
+<div class="section" id="development-upgrades">
+<h2>Development Upgrades<a class="headerlink" href="#development-upgrades" title="Permalink to this headline">¶</a></h2>
+<p>Once you are up and running, if you pull down a new version of the source code, you may find that
+dependencies have changed or there are migrations to apply.</p>
+<p>On each machine in a cluster:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">requirements</span>
+</pre></div>
+</div>
+<p>Once:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">migrate</span>
+</pre></div>
+</div>
+<p>Then you can bounce your processes and will be good to go.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="development_guide.html" class="btn btn-neutral float-right" title="Development Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="resources.html" class="btn btn-neutral" title="Community Resources" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

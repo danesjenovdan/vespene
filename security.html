@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Security Guide &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Settings" href="settings.html" />
+    <link rel="prev" title="Plugins" href="plugins.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Security</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#do-not-put-your-build-system-on-the-public-internet">Do Not Put Your Build System On The Public Internet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limit-the-number-of-admin-users">Limit The Number of Admin Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disable-the-admin-view">Disable The Admin View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#isolation-methods-for-worker-pools">Isolation Methods for Worker Pools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#no-multi-tenancy">No Multi-tenancy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#secret-encryption-and-the-database">Secret Encryption and the Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lock-down-postgresql">Lock Down PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understand-variables-snippets-values-are-semi-public">Understand Variables/Snippets Values are Semi-Public</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#climbout">Climbout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-insertion-and-spamming">Project Insertion and Spamming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependency-exploits">Dependency Exploits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ssl">SSL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#found-a-security-bug-not-mentioned-above">Found a Security Bug Not Mentioned Above?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Security Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/security.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="security-guide">
+<span id="security"></span><h1>Security Guide<a class="headerlink" href="#security-guide" title="Permalink to this headline">¶</a></h1>
+<p>Securing a build system is important, all of your code runs through your build system and the build system
+often has priveledged access to other parts of your environment.  Some build systems are more secure than
+others, and your approach to security may vary based on your concerns about insider threat security.</p>
+<p>Vespene was largely designed with security in-mind, but can always be improved. If you have security
+concerns that may effect production deployments, please contact <a class="reference external" href="mailto:michael&#37;&#52;&#48;michaeldehaan&#46;net">michael<span>&#64;</span>michaeldehaan<span>&#46;</span>net</a> to discuss them.</p>
+<p>Here are some tips to keep Vespene configured more securely and prevent unwanted surprises.</p>
+<div class="section" id="do-not-put-your-build-system-on-the-public-internet">
+<h2>Do Not Put Your Build System On The Public Internet<a class="headerlink" href="#do-not-put-your-build-system-on-the-public-internet" title="Permalink to this headline">¶</a></h2>
+<p>With the exception of routing <a class="reference internal" href="webhooks.html#webhooks"><span class="std std-ref">Webhooks</span></a> (likely through an intermediate server), Vespene should not be publically accessible on the
+open internet. If you take most modern build systems you can find public instances of them through things
+like shodan, and this should be considered quite alarming. The ability to take over a build system
+allows manipulation of production code inside organizational environments, and can be devastating.</p>
+<p>If you want to use webhooks, consider forwarding webhooks posts intelligently through a public server you do control, only
+allowing them from known sources, and do not make Vespene entirely public.</p>
+</div>
+<div class="section" id="limit-the-number-of-admin-users">
+<h2>Limit The Number of Admin Users<a class="headerlink" href="#limit-the-number-of-admin-users" title="Permalink to this headline">¶</a></h2>
+<p>Most users don’t need admin (superuser) access.</p>
+<p>When users are not given admin access, they are subject to access control as described in <a class="reference internal" href="access.html#access"><span class="std std-ref">SSH Keys and Service Logins</span></a>, which
+has some very good reasonable defaults.</p>
+<p>Admin access should be given out only to users you trust.</p>
+</div>
+<div class="section" id="disable-the-admin-view">
+<h2>Disable The Admin View<a class="headerlink" href="#disable-the-admin-view" title="Permalink to this headline">¶</a></h2>
+<p>While not a security consideration per se, the admin view allows direct database manipulation that bypasses
+a large amount of business logic in the application.  Editing in the admin view should almost never
+happen, though it is ok to use the admin view to delete objects.</p>
+<p>If you want to discourage users from manually editing database results, it may be advisable to disable
+the Django admin view in settings.</p>
+<p>Superusers in the main application will still have full access.</p>
+</div>
+<div class="section" id="isolation-methods-for-worker-pools">
+<h2>Isolation Methods for Worker Pools<a class="headerlink" href="#isolation-methods-for-worker-pools" title="Permalink to this headline">¶</a></h2>
+<p>Vespene <a class="reference internal" href="workers.html#workers"><span class="std std-ref">Worker Pools</span></a> have configurable isolation modes for security reasons.</p>
+<p>If you have docker installed, the “Basic Container” isolation mode will be the easiest to set up.</p>
+<p>When using this mode, the base container image for the build is set <em>per project</em>, and the sudo
+settings on the worker pool are ignored.  Right now there isn’t a whitelist of what images users can choose
+for base images, so technically they could build based on any image in Docker Hub or a private registry
+the docker-CLI has access to. This may change in the future to be something that is web-configurable.</p>
+<p>If using the sudo isolation mode <em>instead</em>, it is strictly vital that the sudo_user chosen does not
+have read access to the Vespene configuration files, to avoid build scripts obtaining database
+access.  In particular, during the setup process you probably generated secrets via “make secrets” (aka
+“python manage.py generate_secrets”).  This command writes files into /etc/vespene/settings.d/secrets.</p>
+<p>These files are used to decrypt secrets in the database when using the basic encryption plugin that ships
+with Vespene.</p>
+</div>
+<div class="section" id="no-multi-tenancy">
+<h2>No Multi-tenancy<a class="headerlink" href="#no-multi-tenancy" title="Permalink to this headline">¶</a></h2>
+<p>Vespene was intentionally NOT designed for multi-tenancy between potentially competing organizations.</p>
+<p>Instead install a separate isolated Vespene for each organization.</p>
+<p>While this is technically possible to do, it would be a huge time-suck and bloat the code in ways we’d rather
+not deal with it, and would likely not be something 99% of users would use. Instead, deploy a separate
+Vespene cluster for each tenant if you want to accomplish that level of organizational isolation.</p>
+</div>
+<div class="section" id="secret-encryption-and-the-database">
+<h2>Secret Encryption and the Database<a class="headerlink" href="#secret-encryption-and-the-database" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned earlier, the default configuration for Vespene uses symmetric encryption to keep from storing
+SSH keys, unlock passwords, and SCM logins in raw plaintext.  The key to unlock these passwords is in /etc/vespene/settings.d/secrets.py
+and must be available on all machines in the cluster.</p>
+<p>Be aware of who can access this file and do not allow the build sudo_user as configured on the Worker Pool object
+to read it, lest the build system itself be used to retrieve the contents of this file.</p>
+<p>Similarly, you want to make sure the build sudo user does not have access to read the database connection info in settings.d as well,
+as this would allow directly mucking with the database.</p>
+<p>When using worker pools with container isolation, this is also not a concern.</p>
+<p>Only admins have the ability to configure worker pools so there is no mechanism for regular users to change the sudo user that runs
+their builds.</p>
+<p>The encryption mechanism is in fact pluggable if you want to use another method.</p>
+</div>
+<div class="section" id="lock-down-postgresql">
+<h2>Lock Down PostgreSQL<a class="headerlink" href="#lock-down-postgresql" title="Permalink to this headline">¶</a></h2>
+<p>In a secure configuration, only the Vespene web interface nodes and the worker nodes should be able to connect to
+PostgreSQL.</p>
+<p>This is a network/firewall and database authentication issue and is a responsibility of the administrator.</p>
+<p>A database administrator will only be able to read encrypted versions of keys and passwords.</p>
+<p>If your database administrator, or those with access to database backups, has access to the Vespene secrets file and the database this should be considered
+under an insider threat scenario.</p>
+</div>
+<div class="section" id="understand-variables-snippets-values-are-semi-public">
+<h2>Understand Variables/Snippets Values are Semi-Public<a class="headerlink" href="#understand-variables-snippets-values-are-semi-public" title="Permalink to this headline">¶</a></h2>
+<p>Variables in Vespene (as opposed to secrets, like passwords) are more or less public.</p>
+<p>Don’t store passwords in “variables” or “Variable Sets” inside of Vespene unless you don’t mind all users of Vespene
+and the associated projects being able to read them.</p>
+<p>These values are available for anyone with a login, and if the buildroots are made more public (for instance, made available over
+NFS or HTTP or FTP), those variable files are also accessible in the build root.</p>
+</div>
+<div class="section" id="climbout">
+<h2>Climbout<a class="headerlink" href="#climbout" title="Permalink to this headline">¶</a></h2>
+<p>If using the sudo isolation, one build script will be able to write into the build root of another.</p>
+<p>Use the basic_container isolation mode if you want to avoid this.</p>
+<p>It’s generally not a problem that one developer might try to pollute the build directories of another build, but it is technically
+possible, and is possible in most production build systems.</p>
+</div>
+<div class="section" id="project-insertion-and-spamming">
+<h2>Project Insertion and Spamming<a class="headerlink" href="#project-insertion-and-spamming" title="Permalink to this headline">¶</a></h2>
+<p>In the stock configuration any user can create any number of objects, because we trust users who are given access to Vespene
+are employees who have important business reasons for accessing the service.  While they cannot edit objects they do not have
+rights to, it does mean granting access to 3000 people to create projects could result in a degree of disorganization.</p>
+<p>It is certainly true that a user who can create projects has, just like a user who has access to a source code repository,
+access to make the build system run certain commands in the environment where workers run.</p>
+<p>Limiting access to creation of certain types of objects to certain groups of users can be controlled with the “group_required”
+plugin.</p>
+<p>For instance, it might be desirable to use the “group_required” plugin to only allow Developers, QA, and Ops to create projects
+in Vespene, while users in the “Support” pool may only be able to run jobs where they have been added to the launch group
+for that particular project.</p>
+</div>
+<div class="section" id="dependency-exploits">
+<h2>Dependency Exploits<a class="headerlink" href="#dependency-exploits" title="Permalink to this headline">¶</a></h2>
+<p>This vulnerability is possible in ALL build systems, and a bit of a stretch, but it was worth bringing up.</p>
+<p>What if a software dependency you are using is compromised?</p>
+<p>It could mail your code somewhere, or use your build machine to do some forms of evil.</p>
+<p>If this is a concern, consider vendoring all of your 3rd party libraries or using mirroring software.</p>
+<p>Also limit what network resources your build machines can access.</p>
+</div>
+<div class="section" id="ssl">
+<h2>SSL<a class="headerlink" href="#ssl" title="Permalink to this headline">¶</a></h2>
+<p>You should consider fronting Vespene’s webserver with NGINX or Apache to provide <a class="reference external" href="https://">https://</a> access.
+This is not provided if you are just accessing Vespene on port 8000, and we did not want to require Apache
+vs NGINX for all users because users have specific preferences.</p>
+<p>If you do proxy requests through, we recommend routing “/” on port 80 to “/” on port 8000 to keep things completely
+simple, and not running other web applications on the Vespene box.</p>
+<p>Vespene isn’t really coded to make the URL pattern adjustable at this time.</p>
+</div>
+<div class="section" id="found-a-security-bug-not-mentioned-above">
+<h2>Found a Security Bug Not Mentioned Above?<a class="headerlink" href="#found-a-security-bug-not-mentioned-above" title="Permalink to this headline">¶</a></h2>
+<p>Please email michael &#64; michaeldehaan.net with details and we’ll work to address it quickly.</p>
+<p>The same goes for suggestions to this guide. Thank you!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="settings.html" class="btn btn-neutral float-right" title="Settings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plugins.html" class="btn btn-neutral" title="Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>

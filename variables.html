@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Variables &mdash; Vespene  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SSH Keys and Service Logins" href="access.html" />
+    <link rel="prev" title="Projects" href="projects.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="contents.html" class="icon icon-home"> Vespene
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">About Vespene</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Fundamentals</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="workers.html">Workers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">Projects</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-variables">Basic Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variable-sets">Variable Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#templates">Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#snippets">Snippets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-variables-from-the-build-environment">Accessing Variables From The Build Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-variables">Output Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#precedence">Precedence</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="access.html">Access</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Workflow</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="importing.html">Imports (.vespene)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_questions.html">Launch Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pipelines.html">Pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webhooks.html">Webhooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoscaling.html">Autoscaling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Admin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authz.html">Authorization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrades.html">Upgrades</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Community</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_setup.html">Development Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development_guide.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partnership.html">Partnership Program</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="contents.html">Vespene</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="contents.html">Docs</a> &raquo;</li>
+        
+      <li>Variables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/variables.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <img alt="Vespene Logo" class="align-right" src="vespene_logo.png" />
+<div class="section" id="variables">
+<span id="id1"></span><h1>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h1>
+<p>A major challenge to large organizations is enforcing commonality in build scripts.  To do this, Vespene
+allows the build script to be templated, using various variables set throughout the program.</p>
+<p>This allows reuse in large build systems where standards between build scripts, or common settings, sometimes
+drift and are hard to make consistent.</p>
+<p>Vespene also allows simple text substitution but also substitution of larger blocks of text, which Vespene
+calls “Snippets”. Snippets are first-class objects in Vespene, and variables can either be defined directly on an object
+(like a stage or project) or attached to “Variable Sets” which are like buckets of variables that can
+be easily “sucked in” to be reused between different objects.</p>
+<p>Explore the Vespene UI and you will encounter places to enter variables, variable sets, and also snippets.  Snippets
+are always top level under the “Snippets” heading, but variables and variables sets can be attached to many object types.</p>
+<div class="section" id="basic-variables">
+<h2>Basic Variables<a class="headerlink" href="#basic-variables" title="Permalink to this headline">¶</a></h2>
+<p>What we are calling “basic” variables are variables that are assigned directly on an object, like a project, in JSON format.
+These variables aren’t shared or reusable with other projects but are an easy way to avoid repeating certain constants throughout
+a build script.</p>
+</div>
+<div class="section" id="variable-sets">
+<span id="id2"></span><h2>Variable Sets<a class="headerlink" href="#variable-sets" title="Permalink to this headline">¶</a></h2>
+<p>Variable sets are reusable groups of variables that can be assigned to any object, and in fact multiple different objects.</p>
+<p>For instance, imagine in a basic example an IT team defines the URLs for various important service endpoints.</p>
+<p>Any project that wanted access to these definitions could simply choose to attach the variable set that the IT team created.</p>
+<p>It is basically a way to import some variables without having to duplicate their values multiple times.</p>
+</div>
+<div class="section" id="templates">
+<span id="id3"></span><h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>In a build script, you can access any variables using Jinja2 syntax, like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">some_script</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">option</span><span class="o">=</span><span class="p">{{</span> <span class="n">variable_name</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>A great deal of Jinja2 syntax is available, see the Jinja2 website for details.  In short, you can do things like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;turbo&quot;</span> <span class="o">%</span><span class="p">}</span>
+   <span class="n">sh</span> <span class="n">go</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">install</span><span class="o">-</span><span class="n">unilateral</span><span class="o">-</span><span class="n">phase</span><span class="o">-</span><span class="n">detractors</span> <span class="o">--</span><span class="n">hydrocoptic</span><span class="o">-</span><span class="n">marvelzanes</span><span class="o">=</span><span class="p">{{</span> <span class="n">marvelzane_count</span> <span class="p">}}</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>There are also loops.</p>
+</div>
+<div class="section" id="snippets">
+<span id="id4"></span><h2>Snippets<a class="headerlink" href="#snippets" title="Permalink to this headline">¶</a></h2>
+<img alt="Example snippet" class="align-left" src="_images/snippet1.png" />
+<p>Snippets in Vespene are variables whose values are chunks of text that are themselves also templates.</p>
+<p>These are created as top level objects, so it’s easy for one group to maintain a component of a build
+instruction used by multiple other groups.</p>
+<p>Snippets are loaded in a build script in exactly the same way as variables.  In the following example, a build script
+pulls in two snippets named “common_setup” and “security_scan”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">common_setup</span> <span class="p">}}</span>
+<span class="n">my_build</span><span class="o">.</span><span class="n">sh</span>
+<span class="p">{{</span> <span class="n">do_security_scan</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>Jinja2 also supports a lot of logic, like if statements, which can also be used.</p>
+<p>The snippet can also make use of evaluating variables and Jinja2 logic, including the Jinja2 set statement.
+For instance:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">s3_bucket</span> <span class="o">=</span> <span class="s2">&quot;blippy&quot;</span> <span class="p">}</span>
+<span class="p">{{</span> <span class="n">s3_push</span> <span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-variables-from-the-build-environment">
+<span id="vespene-json"></span><h2>Accessing Variables From The Build Environment<a class="headerlink" href="#accessing-variables-from-the-build-environment" title="Permalink to this headline">¶</a></h2>
+<p>Bonus feature! The variables are also made available in the build root in a file called “vespene.json”.</p>
+<p>It is worth noting that YAML systems can load JSON files automatically too, so if you have a tool
+that consumes YAML this is an easy way to inject Vespene parameters into that tool. Can you think of
+one?</p>
+</div>
+<div class="section" id="output-variables">
+<span id="id5"></span><h2>Output Variables<a class="headerlink" href="#output-variables" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="pipelines.html#pipelines"><span class="std std-ref">Pipelines</span></a> often need to pass variables from one stage into other stages.</p>
+<p>In the build output, simply write the following to standard output on a blank line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vespene</span><span class="o">/</span><span class="nb">set</span> <span class="n">variable_name</span> <span class="n">variable_value</span>
+</pre></div>
+</div>
+<p>The variable name must be a valid Python identifier.</p>
+<p>Be sure to <em>not</em> include an equals sign. Longer values can be included in single or double quotes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vespene</span><span class="o">/</span><span class="nb">set</span> <span class="n">some_value</span> <span class="s2">&quot;this value has spaces&quot;</span>
+</pre></div>
+</div>
+<p>This variable will be made available to all future pipelines in later stages of the pipeline build.</p>
+</div>
+<div class="section" id="precedence">
+<h2>Precedence<a class="headerlink" href="#precedence" title="Permalink to this headline">¶</a></h2>
+<p>Where should you put variables if you want to know how to override them?</p>
+<p>It is best to try to just define variables in one place.  But in some use cases you may want
+to set a global default setting and then have a team override it.</p>
+<p>The precedence order is noted below. In event of variables set in more than one place, the variables listed LAST in this list will have highest precedence:</p>
+<ul class="simple">
+<li>Any variables or variable sets set on the <a class="reference internal" href="workers.html#worker-pools"><span class="std std-ref">Worker Pools</span></a> object.</li>
+<li>Any variables or variable sets set on the <a class="reference internal" href="pipelines.html#pipelines"><span class="std std-ref">Pipelines</span></a> object.</li>
+<li>The names of any <a class="reference internal" href="#snippets"><span class="std std-ref">Snippets</span></a></li>
+<li>Variables loaded from a prior stage in a pipeline</li>
+<li>Variables assigned directly on the project</li>
+</ul>
+<p>Many objects allow pulling in variables from variable sets or just setting them directly by attaching some JSON. If a variable is defined in both loose variables and variable sets at the same “level”, the loose variables
+override the variable sets.</p>
+<p>Also note, in the event a variable has a value of a dictionary, the variables inside are <em>not</em> merged, but the new variable will stomp over the old one.</p>
+<p>Again, this sounds complicated as there are many places to put variables, but it’s easiest if
+you just think of the places variables should go:</p>
+<ul class="simple">
+<li>Site specific variables should be set on a variable set, named something like “Site Defaults” and attached to each project</li>
+<li>Environmental specific variables (like common server addresses or s3 bucket names) should be set on a stage object. These are useful even if <a class="reference internal" href="pipelines.html#pipelines"><span class="std std-ref">Pipelines</span></a> happen to be unused or disabled.</li>
+<li>Build results should be communicated through output variables when in a pipeline</li>
+<li>Etc.</li>
+</ul>
+<p>The whole variable precedence system is pluggable, so you can rearrange the rules or even add new
+variable plugins to pull in variables from external sources.  However, if you do rearrange the policy, let us know when filing any tickets or talking about it, otherwise we’ll assume
+your configuration is set up stock like everyone else’s.</p>
+<p>We hope you enjoy organizing your builds with the variable subsystem.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="access.html" class="btn btn-neutral float-right" title="SSH Keys and Service Logins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="projects.html" class="btn btn-neutral" title="Projects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Michael DeHaan LLC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+  <style>
+    .wy-side-nav-search, .wy-nav-top {
+      background: #444444;
+    }
+    .wy-nav-side {
+      background: #444444;
+    }
+  </style>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127828570-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-127828570-1');
+</script>
+
+
+
+</body>
+</html>
